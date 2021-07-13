@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe3e397690d5544695a8bf54f1db8ea, type: 3}
+  m_Name: Shape_03
+  m_EditorClassIdentifier: 
+  shapeId: 3
+  shapeType: 3
+  sprite: {fileID: 21300000, guid: b9840cba173e4874d8e34c592ab2976d, type: 3}
+  color: {r: 0.87058824, g: 0.7019608, b: 0.8117647, a: 1}
+  tintStatus: 1
