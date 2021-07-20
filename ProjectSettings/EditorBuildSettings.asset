@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/ParuthidotExE/Scenes/MainMenu.unity
     guid: 56b6ad968fc73344f9eaa2e1a6d70053
   - enabled: 1
-    path: Assets/ParuthidotExE/Scenes/InGame.unity
+    path: Assets/ParuthidotExE/Scenes/TippuSultan.unity
     guid: 69b37b355efb7fc41904ddd07d9dfbd2
   m_configObjects: {}

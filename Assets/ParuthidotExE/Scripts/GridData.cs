@@ -52,7 +52,7 @@ namespace ParuthidotExE
                     tiles[i, j] = 0;
                 }
             }
-            Debug.Log(GetGridAsString());
+            //Debug.Log(GetGridAsString());
         }
 
 

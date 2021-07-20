@@ -12,22 +12,14 @@ using UnityEngine;
 
 namespace ParuthidotExE
 {
-    [CreateAssetMenu(fileName = "NewLevelData", menuName = "VerticalFalling/LevelData", order = 1)]
+    [CreateAssetMenu(fileName = "NewLevelData", menuName = "PixelBacteria/LevelData", order = 1)]
     [Serializable]
     public class LevelData : ScriptableObject
     {
         public int levelId;
         public string levelName = "";
-        public int time = 60;//seconds
+        public int time = 120;//seconds
         public int totalShapes = 10;
-        public ShapeData[] shapelDataList;
-
-        public ShapeData GetRandomShapeData()
-        {
-            if (shapelDataList.Length <= 0)
-                return null;
-            return shapelDataList[UnityEngine.Random.Range(0, shapelDataList.Length)];
-        }
     }
 
 

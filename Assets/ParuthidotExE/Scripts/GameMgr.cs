@@ -98,15 +98,8 @@ namespace ParuthidotExE
         }
 
 
-        bool IsValidMove(Vector3 direction)
+        public void OnGameOver()
         {
-            return true;
-        }
-
-
-        void OnGameOver()
-        {
-            SceneManager.LoadScene("GameOver");
         }
 
 
