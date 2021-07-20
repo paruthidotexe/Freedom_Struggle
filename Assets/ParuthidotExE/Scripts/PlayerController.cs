@@ -51,16 +51,16 @@ namespace ParuthidotExE
 
         public void OnMoveInputAction(InputAction.CallbackContext context)
         {
-            //if(context.performed)
-            //{
-            //    //Debug.Log("OnMoveInputAction : " + context.ReadValue<Vector2>());
-            //    //Debug.Log(context.ReadValue<Vector3>());
-            //    //moveDirInputAction = context.ReadValue<Vector2>();
-            //    moveDir.x = moveDirInputAction.x;
-            //    moveDir.y = 0;
-            //    moveDir.z = moveDirInputAction.y;
-            //    Raise_OnMoveAction(moveDir);
-            //}
+            if (context.performed)
+            {
+                //Debug.Log("OnMoveInputAction : " + context.ReadValue<Vector2>());
+                //Debug.Log(context.ReadValue<Vector3>());
+                moveDirInputAction = context.ReadValue<Vector2>();
+                moveDir.x = moveDirInputAction.x;
+                moveDir.y = moveDirInputAction.y;
+                moveDir.z = 0;
+                Raise_OnMoveAction(moveDir);
+            }
         }
 
 

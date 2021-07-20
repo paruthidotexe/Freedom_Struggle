@@ -42,7 +42,7 @@ namespace ParuthidotExE
         public GameObject LevelMap;
         public GameObject Blue_LevelMap;
 
-        public GameObject Player_Blue;
+        [SerializeField] GameObject playerGreen;
 
         private void OnEnable()
         {
@@ -75,7 +75,7 @@ namespace ParuthidotExE
             gridData = LevelDB.GetGridData(levelWidth, levelHeight);
             levelTiles = gridData.tiles;
             CreateBlueLevel();
-            Player_Blue.transform.position = new Vector3(0, 0.0f, 0);
+            playerGreen.transform.position = new Vector3(0, 0.0f, 0);
         }
 
 
@@ -104,6 +104,8 @@ namespace ParuthidotExE
 
         public void OnMoveAction(Vector3 direction)
         {
+            Debug.Log(direction);
+            playerGreen.transform.position += direction;
         }
 
 
