@@ -18,3 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: debf267cb31649440b81394fd99c4ab2, type: 2}
   - {fileID: 11400000, guid: 2482d27421a31054ba417c881200063e, type: 2}
   - {fileID: 11400000, guid: 0dfa1f30506246047ac293445c70ce1e, type: 2}
+  ChangeTheme: {fileID: 11400000, guid: 070f8107414f6704593c50423e49dc17, type: 2}

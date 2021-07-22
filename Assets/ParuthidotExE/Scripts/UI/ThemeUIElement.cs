@@ -14,7 +14,7 @@ namespace ParuthidotExE
 {
     public class ThemeUIElement : MonoBehaviour
     {
-        public VoidEventChannelSO ChangeTheme;
+        public VoidChannelSO ChangeTheme;
 
         private void OnEnable()
         {

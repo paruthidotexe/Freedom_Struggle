@@ -12,8 +12,8 @@ using UnityEngine.Events;
 
 namespace ParuthidotExE
 {
-    [CreateAssetMenu(menuName = "Events/Void Event Channel")]
-    public class VoidEventChannelSO : EventChannelBaseSO
+    [CreateAssetMenu(menuName = "Events/Void Channel")]
+    public class VoidChannelSO : EventChannelBaseSO
     {
         public UnityAction OnEventRaised;
 
@@ -22,6 +22,8 @@ namespace ParuthidotExE
             if (OnEventRaised != null)
                 OnEventRaised.Invoke();
         }
+
+
     }
 
 

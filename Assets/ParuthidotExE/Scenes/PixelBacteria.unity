@@ -458,6 +458,42 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c74b2d8b-922c-475a-b99a-9da9b30e21c9
     m_ActionName: ButtonActionMap/MoveDown[/Keyboard/s,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1138098538}
+        m_TargetAssemblyTypeName: ParuthidotExE.PlayerController, Assembly-CSharp
+        m_MethodName: OnPlayerStateAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8ac46b3f-8f91-40ab-b731-95c13cc2ee01
+    m_ActionName: PlayerActionMap/PlayerState[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ff9f9711-09cd-4657-9400-84d8611ed35b
+    m_ActionName: PlayerActionMap/SwitchState[/Keyboard/minus,/Keyboard/equals,/Keyboard/leftBracket,/Keyboard/rightBracket,/Keyboard/ctrl]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1138098538}
+        m_TargetAssemblyTypeName: ParuthidotExE.PlayerController, Assembly-CSharp
+        m_MethodName: OnChangeStateAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 07da7836-0a78-47ce-9f3a-e450b45678fa
+    m_ActionName: PlayerActionMap/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerActionMap
@@ -627,8 +663,9 @@ MonoBehaviour:
   levelMgr: {fileID: 1449730097}
   Tile_Blue_Prefab: {fileID: 8198164092613249904, guid: 230f293f4de01c941ae675e90a70d9ee, type: 3}
   Tile_Pink_Prefab: {fileID: 8836171299778014046, guid: 059562a37d7138a43825929a3c53dc80, type: 3}
-  onGameOver: {fileID: 11400000, guid: e54b5ec217d8a964eabb433060f744ea, type: 2}
+  GameOverEvent: {fileID: 11400000, guid: e54b5ec217d8a964eabb433060f744ea, type: 2}
   RestartEvent: {fileID: 11400000, guid: fdc9492db136f6f4d92083247940806c, type: 2}
+  ChangePlayerStateEvent: {fileID: 11400000, guid: 9f6241dc52b2cda44b92e2e18ff54f62, type: 2}
   LevelMap: {fileID: 1814670965}
   Blue_LevelMap: {fileID: 1315160431}
   playerGreen: {fileID: 4043138171062086623}

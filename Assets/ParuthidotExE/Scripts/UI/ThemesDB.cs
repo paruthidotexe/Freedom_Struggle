@@ -19,7 +19,7 @@ namespace ParuthidotExE
         public Color[] colors;
         public ThemeData[] themeList;
 
-        public VoidEventChannelSO ChangeTheme;
+        public VoidChannelSO ChangeTheme;
 
         public ThemeData GetRandomTheme()
         {

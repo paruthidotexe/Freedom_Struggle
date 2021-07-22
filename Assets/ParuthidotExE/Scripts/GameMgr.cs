@@ -37,7 +37,7 @@ namespace ParuthidotExE
 
         private void OnEnable()
         {
-            PlayerController.OnMoveAction += OnMoveAction;
+            PlayerController.MoveAction += OnMoveAction;
             HUDScripts.MoveAction += OnMoveAction;
             HUDScripts.ReverseAction += OnReverse;
             HUDScripts.NextLevelEvent += OnNextLevel;
@@ -46,7 +46,7 @@ namespace ParuthidotExE
 
         private void OnDisable()
         {
-            PlayerController.OnMoveAction -= OnMoveAction;
+            PlayerController.MoveAction -= OnMoveAction;
             HUDScripts.MoveAction -= OnMoveAction;
             HUDScripts.ReverseAction -= OnReverse;
             HUDScripts.NextLevelEvent -= OnNextLevel;

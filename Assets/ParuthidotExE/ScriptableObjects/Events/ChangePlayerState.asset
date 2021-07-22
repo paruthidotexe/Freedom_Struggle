@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d6cf919f4866f7499251278e0ebc009, type: 3}
-  m_Name: ChangeTheme
+  m_Script: {fileID: 11500000, guid: 9e05fc7fab7a5c34e9b931685817ccb4, type: 3}
+  m_Name: ChangePlayerState
   m_EditorClassIdentifier: 
   description: 

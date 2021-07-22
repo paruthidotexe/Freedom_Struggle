@@ -17,8 +17,10 @@ namespace ParuthidotExE
         Vector3 moveDir = Vector3.zero;
 
         public delegate void OnVector3(Vector3 moveDir);
-        public static event OnVector3 OnMoveAction;
-        public static event OnVector3 OnClickedAction;
+        public delegate void OnStringDelegate(string val);
+        public static event OnVector3 ClickedAction;
+        public static event OnVector3 MoveAction;
+        public static event OnStringDelegate ChangeStateAction;
 
         public GameObject tapPosObj;
         public Vector2 mousePos = Vector2.zero;
@@ -30,25 +32,31 @@ namespace ParuthidotExE
 
         void Update()
         {
-
         }
 
 
         // Events
-        void Raise_OnMoveAction(Vector3 moveDir)
+        void Raise_MoveAction(Vector3 moveDir)
         {
-            if (OnMoveAction != null)
-                OnMoveAction(moveDir);
+            if (MoveAction != null)
+                MoveAction(moveDir);
         }
 
 
-        void Raise_OnClickedAction(Vector3 moveDir)
+        void Raise_ClickedAction(Vector3 moveDir)
         {
-            if (OnClickedAction != null)
-                OnClickedAction(moveDir);
+            if (ClickedAction != null)
+                ClickedAction(moveDir);
+        }
+
+        void Raise_CloneAction(string val)
+        {
+            if (ChangeStateAction != null)
+                ChangeStateAction(val);
         }
 
 
+        // Input Editor hooks
         public void OnMoveInputAction(InputAction.CallbackContext context)
         {
             if (context.performed)
@@ -59,7 +67,7 @@ namespace ParuthidotExE
                 moveDir.x = moveDirInputAction.x;
                 moveDir.y = moveDirInputAction.y;
                 moveDir.z = 0;
-                Raise_OnMoveAction(moveDir);
+                Raise_MoveAction(moveDir);
             }
         }
 
@@ -74,7 +82,7 @@ namespace ParuthidotExE
                 moveDir.x = -1;
                 moveDir.y = 0;
                 moveDir.z = 0;
-                Raise_OnMoveAction(moveDir);
+                Raise_MoveAction(moveDir);
             }
         }
 
@@ -89,7 +97,7 @@ namespace ParuthidotExE
                 moveDir.x = 1;
                 moveDir.y = 0;
                 moveDir.z = 0;
-                Raise_OnMoveAction(moveDir);
+                Raise_MoveAction(moveDir);
             }
         }
 
@@ -104,7 +112,7 @@ namespace ParuthidotExE
                 moveDir.x = 0;
                 moveDir.y = 0;
                 moveDir.z = 1;
-                Raise_OnMoveAction(moveDir);
+                Raise_MoveAction(moveDir);
             }
         }
 
@@ -119,7 +127,7 @@ namespace ParuthidotExE
                 moveDir.x = 0;
                 moveDir.y = 0;
                 moveDir.z = -1;
-                Raise_OnMoveAction(moveDir);
+                Raise_MoveAction(moveDir);
             }
         }
 
@@ -135,7 +143,7 @@ namespace ParuthidotExE
                 GameObject curTapPosObj = GameObject.Instantiate(tapPosObj);
                 curTapPosObj.transform.position = newPos;
                 //Debug.Log(mousePos + " vs " + newPos);
-                Raise_OnClickedAction(newPos);
+                Raise_ClickedAction(newPos);
             }
         }
 
@@ -170,12 +178,54 @@ namespace ParuthidotExE
                 //tapPosObj.transform.position = 
             }
         }
+
+
+        public void OnPlayerStateAction(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                //Debug.Log("a1 " + context);
+                //Debug.Log("a2 " + context.valueType);
+                ////Debug.Log("a3 " + context.ReadValueAsButton());
+                //Debug.Log("a3 " + context.control);
+                //Debug.Log("a4 " + context.control.displayName);
+                //Debug.Log("a5 " + context.control.name);
+                //Debug.Log("a6 " + context.control.path);
+                //Debug.Log("a7 " + context.control.variants);
+                //Debug.Log("a8 " + context.control.parent);
+
+                Debug.Log("OnPlayerStateAction " + context.control.displayName);
+                Raise_CloneAction(context.control.displayName);
+            }
+        }
+
+
+        public void OnChangeStateAction(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                Debug.Log("a1 " + context);
+                Debug.Log("a2 " + context.valueType);
+                ////Debug.Log("a3 " + context.ReadValueAsButton());
+                Debug.Log("a3 " + context.control);
+                Debug.Log("a4 " + context.control.displayName);
+                //Debug.Log("a5 " + context.control.name);
+                Debug.Log("a6 " + context.control.path);
+                //Debug.Log("a7 " + context.control.variants);
+                //Debug.Log("a8 " + context.control.parent);
+
+                Debug.Log("OnChangeStateAction " + context.control.displayName);
+                Raise_CloneAction(context.control.displayName);
+            }
+        }
+        // 2do
+        // As Scriptable objects class
+        // Scriptable events as channel
+        //
     }
 
-    // 2do
-    // As Scriptable objects class
-    // Scriptable events as channel
-    //
+
 }
+
 
 

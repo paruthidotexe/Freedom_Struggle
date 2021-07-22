@@ -15,8 +15,9 @@ namespace ParuthidotExE
 {
     public class HUDScripts : MonoBehaviour
     {
-        [SerializeField] VoidEventChannelSO RestartEvent;
-        [SerializeField] VoidEventChannelSO ChangeTheme;
+        [SerializeField] VoidChannelSO RestartEvent;
+        [SerializeField] VoidChannelSO ChangeTheme;
+        [SerializeField] IntChannelSO ChangePlayerStateEvent;
 
         [SerializeField] ThemesDB themesDB;
 
@@ -30,8 +31,21 @@ namespace ParuthidotExE
         // score
         public TMP_Text timeText;
         public TMP_Text scoreText;
+        public TMP_Text stateText;
         int theme = 0;
         int totalThemes = 2;
+
+
+        private void OnEnable()
+        {
+            ChangePlayerStateEvent.OnEventRaised += UpdateStateText;
+        }
+
+
+        private void OnDisable()
+        {
+            ChangePlayerStateEvent.OnEventRaised -= UpdateStateText;
+        }
 
 
         void Start()
@@ -168,6 +182,10 @@ namespace ParuthidotExE
         //        Camera.main.backgroundColor = new Color(0.9f, 0.9f, 0.9f, 1);
         //}
 
+        void UpdateStateText(int val)
+        {
+            stateText.text = "State : " + val;
+        }
 
     }
 

@@ -14,6 +14,16 @@ using UnityEngine;
 
 namespace ParuthidotExE
 {
+    public enum BacteriaState
+    {
+        None = 0,
+        Move,
+        Clone,
+        Destruct,
+        Last
+    }
+
+
     public class PixelBacteria : MonoBehaviour
     {
         // level
@@ -23,6 +33,7 @@ namespace ParuthidotExE
         GameStates gameState;
         GameTimer gameTimer;
         GridData gridData;
+        GridData playerGridData;
 
         int levelWidth = 12;
         int levelHeight = 6;
@@ -35,19 +46,22 @@ namespace ParuthidotExE
         public GameObject Tile_Blue_Prefab;
         public GameObject Tile_Pink_Prefab;
 
-        [SerializeField] private VoidEventChannelSO onGameOver = default;
-        [SerializeField] private VoidEventChannelSO RestartEvent = default;
+        [SerializeField] private VoidChannelSO GameOverEvent = default;
+        [SerializeField] private VoidChannelSO RestartEvent = default;
+        [SerializeField] private IntChannelSO ChangePlayerStateEvent = default;
 
         // LevelRoot
         public GameObject LevelMap;
         public GameObject Blue_LevelMap;
 
         [SerializeField] GameObject playerGreen;
+        BacteriaState bacteriaState = BacteriaState.None;
 
         private void OnEnable()
         {
-            PlayerController.OnMoveAction += OnMoveAction;
-            HUDScripts.MoveAction += OnMoveAction;
+            PlayerController.MoveAction += OnMove;
+            PlayerController.ChangeStateAction += OnChangeBacteriaState;
+            HUDScripts.MoveAction += OnMove;
             HUDScripts.ReverseAction += OnReverse;
             HUDScripts.NextLevelEvent += OnNextLevel;
         }
@@ -55,8 +69,9 @@ namespace ParuthidotExE
 
         private void OnDisable()
         {
-            PlayerController.OnMoveAction -= OnMoveAction;
-            HUDScripts.MoveAction -= OnMoveAction;
+            PlayerController.MoveAction -= OnMove;
+            PlayerController.ChangeStateAction -= OnChangeBacteriaState;
+            HUDScripts.MoveAction -= OnMove;
             HUDScripts.ReverseAction -= OnReverse;
             HUDScripts.NextLevelEvent -= OnNextLevel;
         }
@@ -74,8 +89,10 @@ namespace ParuthidotExE
             //levelMgr.LoadLevel();
             gridData = LevelDB.GetGridData(levelWidth, levelHeight);
             levelTiles = gridData.tiles;
+            playerGridData = new GridData();
             CreateBlueLevel();
-            playerGreen.transform.position = new Vector3(0, 0.0f, 0);
+            playerGreen.transform.position = new Vector3(0, 0, 0);
+            bacteriaState = BacteriaState.Move;
         }
 
 
@@ -102,12 +119,89 @@ namespace ParuthidotExE
         }
 
 
-        public void OnMoveAction(Vector3 direction)
+        public void OnMove(Vector3 direction)
         {
-            Debug.Log(direction);
-            GameObject newObj = GameObject.Instantiate(playerGreen);
-            newObj.transform.position = playerGreen.transform.position;
-            playerGreen.transform.position += direction;
+            //Debug.Log(direction);
+            switch (bacteriaState)
+            {
+                case BacteriaState.None:
+                    //playerGreen.transform.position += direction;
+                    break;
+                case BacteriaState.Move:
+                    playerGreen.transform.position += direction;
+                    break;
+                case BacteriaState.Clone:
+                    GameObject newObj = GameObject.Instantiate(playerGreen);
+                    newObj.transform.position = playerGreen.transform.position;
+                    playerGreen.transform.position += direction;
+                    break;
+                case BacteriaState.Destruct:
+                    //playerGreen.transform.position += direction;
+                    break;
+            }
+        }
+
+
+        public void OnChangeBacteriaState(string newStateStr)
+        {
+            if (newStateStr == "1")
+            {
+                OnChangeBacteriaState(BacteriaState.Move);
+            }
+            else if (newStateStr == "2")
+            {
+                OnChangeBacteriaState(BacteriaState.Clone);
+            }
+            else if (newStateStr == "3")
+            {
+                OnChangeBacteriaState(BacteriaState.Destruct);
+            }
+            else if (newStateStr == "4")
+            {
+                OnChangeBacteriaState(BacteriaState.None);
+            }
+
+            if (newStateStr == "[")
+            {
+                OnPrevState(bacteriaState);
+            }
+            else if (newStateStr == "]")
+            {
+                OnNextState(bacteriaState);
+            }
+        }
+
+
+
+        void OnChangeBacteriaState(BacteriaState newState)
+        {
+            bacteriaState = newState;
+            ChangePlayerStateEvent.RaiseEvent((int)bacteriaState);
+        }
+
+
+        void OnPrevState(BacteriaState newState)
+        {
+            int curStateVal = (int)newState;
+            curStateVal--;
+            if (curStateVal < 0)
+                curStateVal = (int)(BacteriaState.Last) - 1;
+            newState = (BacteriaState)curStateVal;
+            Debug.Log(newState);
+            OnChangeBacteriaState(newState);
+        }
+
+
+        void OnNextState(BacteriaState newState)
+        {
+            int curStateVal = (int)newState;
+            curStateVal++;
+            if (curStateVal > (int)(BacteriaState.Last) - 1)
+            {
+                curStateVal = 0;
+            }
+            newState = (BacteriaState)curStateVal;
+            OnChangeBacteriaState(newState);
         }
 
 
@@ -171,3 +265,4 @@ namespace ParuthidotExE
 
 
 }
+

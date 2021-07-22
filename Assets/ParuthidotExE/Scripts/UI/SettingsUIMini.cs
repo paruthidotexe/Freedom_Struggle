@@ -23,12 +23,12 @@ namespace ParuthidotExE
         [SerializeField] GameObject hapticsOnImg;
         [SerializeField] GameObject hapticsOffImg;
 
-        [SerializeField] VoidEventChannelSO MusicOn;
-        [SerializeField] VoidEventChannelSO MusicOff;
-        [SerializeField] VoidEventChannelSO SFXOn;
-        [SerializeField] VoidEventChannelSO SFXOff;
-        [SerializeField] VoidEventChannelSO HapticsOn;
-        [SerializeField] VoidEventChannelSO HapticsOff;
+        [SerializeField] VoidChannelSO MusicOn;
+        [SerializeField] VoidChannelSO MusicOff;
+        [SerializeField] VoidChannelSO SFXOn;
+        [SerializeField] VoidChannelSO SFXOff;
+        [SerializeField] VoidChannelSO HapticsOn;
+        [SerializeField] VoidChannelSO HapticsOff;
 
         bool isMusicOn = true;
         bool isSFXOn = true;
