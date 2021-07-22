@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Green
-  m_Shader: {fileID: -6465566751694194690, guid: 8d4134a32e5cc274a9e786cc6154f30b, type: 3}
+  m_Name: Liquid_Green
+  m_Shader: {fileID: -6465566751694194690, guid: 11e01f83a03e9ad4183e7143af425685, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -94,12 +94,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - AlphaMid: 0.5
+    - AlphaMid: 1
     - AlphaValue: 0
-    - BorderWidth: 1
+    - BorderWidth: 0
+    - Fill: 0.7
     - Noise: 0
     - NoiseSpeed: 1
     - Transparent: 0
+    - WobbleEffect: 0
+    - WobbleX: 0
+    - WobbleY: 0
+    - WobbleZ: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -127,8 +132,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - BackColor: {r: 0.20470184, g: 0.745283, b: 0.017577427, a: 1}
     - BorderColor: {r: 0.15153532, g: 0.6037736, b: 0, a: 1}
-    - TileColor: {r: 0.2509804, g: 1, b: 0, a: 1}
+    - FillColor: {r: 0.12444057, g: 0.4716981, b: 0.006674961, a: 1}
+    - TileColor: {r: 0.15294118, g: 0.6039216, b: 0, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 87b991b705930eb44a8a0dd76b39a425, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -576,7 +576,6 @@ GameObject:
   - component: {fileID: 1449730096}
   - component: {fileID: 1449730098}
   - component: {fileID: 1449730097}
-  - component: {fileID: 1449730099}
   m_Layer: 0
   m_Name: GamePlay
   m_TagString: Untagged
@@ -633,20 +632,6 @@ MonoBehaviour:
   LevelMap: {fileID: 1814670965}
   Blue_LevelMap: {fileID: 1315160431}
   playerGreen: {fileID: 4043138171062086623}
---- !u!114 &1449730099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1449730095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aa9a4c61e097424cb5df66a9958728f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tapPosObj: {fileID: 0}
-  mousePos: {x: 0, y: 0}
 --- !u!1 &1575031930
 GameObject:
   m_ObjectHideFlags: 0

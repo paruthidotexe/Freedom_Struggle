@@ -105,6 +105,8 @@ namespace ParuthidotExE
         public void OnMoveAction(Vector3 direction)
         {
             Debug.Log(direction);
+            GameObject newObj = GameObject.Instantiate(playerGreen);
+            newObj.transform.position = playerGreen.transform.position;
             playerGreen.transform.position += direction;
         }
 
