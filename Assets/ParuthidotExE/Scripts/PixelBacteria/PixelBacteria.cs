@@ -14,16 +14,6 @@ using UnityEngine;
 
 namespace ParuthidotExE
 {
-    public enum BacteriaState
-    {
-        None = 0,
-        Move,
-        Clone,
-        Destruct,
-        Last
-    }
-
-
     public class PixelBacteria : MonoBehaviour
     {
         // level
@@ -54,8 +44,9 @@ namespace ParuthidotExE
         public GameObject LevelMap;
         public GameObject Blue_LevelMap;
 
-        [SerializeField] GameObject playerGreen;
-        BacteriaState bacteriaState = BacteriaState.None;
+        [SerializeField] GameObject playerGreenObj;
+        [SerializeField] Bacteria playerGreen;
+
 
         private void OnEnable()
         {
@@ -91,10 +82,8 @@ namespace ParuthidotExE
             levelTiles = gridData.tiles;
             playerGridData = new GridData();
             CreateBlueLevel();
-            playerGreen.transform.position = new Vector3(0, 0, 0);
-            bacteriaState = BacteriaState.Move;
+            playerGreenObj.transform.position = new Vector3(0, 0, 0);
         }
-
 
 
         void Update()
@@ -121,89 +110,32 @@ namespace ParuthidotExE
 
         public void OnMove(Vector3 direction)
         {
+            // input -> save command + time -> command Execute
+            // undi -> reverse command -> execute
+            playerGreen.OnMove(direction, playerGreenObj);
             //Debug.Log(direction);
-            switch (bacteriaState)
-            {
-                case BacteriaState.None:
-                    //playerGreen.transform.position += direction;
-                    break;
-                case BacteriaState.Move:
-                    playerGreen.transform.position += direction;
-                    break;
-                case BacteriaState.Clone:
-                    GameObject newObj = GameObject.Instantiate(playerGreen);
-                    newObj.transform.position = playerGreen.transform.position;
-                    playerGreen.transform.position += direction;
-                    break;
-                case BacteriaState.Destruct:
-                    //playerGreen.transform.position += direction;
-                    break;
-            }
+            //switch (playerGreen.state)
+            //{
+            //    case BacteriaState.None:
+            //        //playerGreen.transform.position += direction;
+            //        break;
+            //    case BacteriaState.Move:
+            //        playerGreenObj.transform.position += direction;
+            //        break;
+            //    case BacteriaState.Clone:
+            //        GameObject newObj = GameObject.Instantiate(playerGreenObj);
+            //        newObj.transform.position = playerGreenObj.transform.position;
+            //        playerGreenObj.transform.position += direction;
+            //        break;
+            //    case BacteriaState.Destruct:
+            //        //playerGreen.transform.position += direction;
+            //        break;
+            //}
         }
 
 
         public void OnChangeBacteriaState(string newStateStr)
         {
-            if (newStateStr == "1")
-            {
-                OnChangeBacteriaState(BacteriaState.Move);
-            }
-            else if (newStateStr == "2")
-            {
-                OnChangeBacteriaState(BacteriaState.Clone);
-            }
-            else if (newStateStr == "3")
-            {
-                OnChangeBacteriaState(BacteriaState.Destruct);
-            }
-            else if (newStateStr == "4")
-            {
-                OnChangeBacteriaState(BacteriaState.None);
-            }
-
-            if (newStateStr == "[")
-            {
-                OnPrevState(bacteriaState);
-            }
-            else if (newStateStr == "]")
-            {
-                OnNextState(bacteriaState);
-            }
-        }
-
-
-
-        void OnChangeBacteriaState(BacteriaState newState)
-        {
-            bacteriaState = newState;
-            ChangePlayerStateEvent.RaiseEvent((int)bacteriaState);
-            Bacteria bacteriaScript = playerGreen.GetComponent<Bacteria>();
-            bacteriaScript.ChangeFaceReaction(bacteriaState);
-        }
-
-
-        void OnPrevState(BacteriaState newState)
-        {
-            int curStateVal = (int)newState;
-            curStateVal--;
-            if (curStateVal < 0)
-                curStateVal = (int)(BacteriaState.Last) - 1;
-            newState = (BacteriaState)curStateVal;
-            Debug.Log(newState);
-            OnChangeBacteriaState(newState);
-        }
-
-
-        void OnNextState(BacteriaState newState)
-        {
-            int curStateVal = (int)newState;
-            curStateVal++;
-            if (curStateVal > (int)(BacteriaState.Last) - 1)
-            {
-                curStateVal = 0;
-            }
-            newState = (BacteriaState)curStateVal;
-            OnChangeBacteriaState(newState);
         }
 
 
