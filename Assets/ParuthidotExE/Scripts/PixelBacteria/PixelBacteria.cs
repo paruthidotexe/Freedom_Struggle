@@ -46,9 +46,9 @@ namespace ParuthidotExE
         public GameObject Tile_Blue_Prefab;
         public GameObject Tile_Pink_Prefab;
 
-        [SerializeField] private VoidChannelSO GameOverEvent = default;
-        [SerializeField] private VoidChannelSO RestartEvent = default;
-        [SerializeField] private IntChannelSO ChangePlayerStateEvent = default;
+        [SerializeField] VoidChannelSO GameOverEvent = default;
+        [SerializeField] VoidChannelSO RestartEvent = default;
+        [SerializeField] IntChannelSO ChangePlayerStateEvent = default;
 
         // LevelRoot
         public GameObject LevelMap;
@@ -177,6 +177,8 @@ namespace ParuthidotExE
         {
             bacteriaState = newState;
             ChangePlayerStateEvent.RaiseEvent((int)bacteriaState);
+            Bacteria bacteriaScript = playerGreen.GetComponent<Bacteria>();
+            bacteriaScript.ChangeFaceReaction(bacteriaState);
         }
 
 
