@@ -96,7 +96,7 @@ Material:
     m_Floats:
     - AlphaMid: 1
     - AlphaValue: 0
-    - BorderWidth: 4
+    - BorderWidth: 3
     - Noise: 0
     - NoiseSpeed: 1
     - Transparent: 0

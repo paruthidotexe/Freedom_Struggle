@@ -1,9 +1,8 @@
 ///-----------------------------------------------------------------------------
 ///
-/// LevelMgr
+/// PixelBacteria
 /// 
-/// Load level, assets
-/// Generate levels
+/// Gameplay
 ///
 ///-----------------------------------------------------------------------------
 
@@ -30,7 +29,6 @@ namespace ParuthidotExE
         // Level Tiles 0 = hole, 1 = floor, 2,3,4..9 = Wall height, 10 = Door, ?128 = player
         int[,] levelTiles;
         Vector2Int playerPos = Vector2Int.one;// j,i
-        Vector2Int doorPos = Vector2Int.one;// j,i
 
         // Prefabs
         public GameObject Tile_Blue_Prefab;
@@ -81,6 +79,9 @@ namespace ParuthidotExE
             gridData = LevelDB.GetGridData(levelWidth, levelHeight);
             levelTiles = gridData.tiles;
             playerGridData = new GridData();
+            playerPos = new Vector2Int(5, 0);
+            Debug.Log(gridData.GetGridAsString());
+            Debug.Log(playerGridData.GetGridAsString());
             CreateBlueLevel();
             playerGreenObj.transform.position = new Vector3(0, 0, 0);
         }
@@ -112,7 +113,11 @@ namespace ParuthidotExE
         {
             // input -> save command + time -> command Execute
             // undi -> reverse command -> execute
-            playerGreen.OnMove(direction, playerGreenObj);
+            playerGreen.OnMove(direction, Tile_Blue_Prefab);
+            playerPos.x += (int)direction.x;
+            playerPos.y += (int)direction.y;
+            playerGridData.SetTileValue(playerPos.x, playerPos.y, 128);
+            playerGridData.GetGridAsString();
             //Debug.Log(direction);
             //switch (playerGreen.state)
             //{
@@ -200,3 +205,8 @@ namespace ParuthidotExE
 
 }
 
+
+// 2d0
+// input -> GameplayScript -> commands player -> player execute -> player anim
+// move from bacteria to pixel bacteria
+//

@@ -26,21 +26,25 @@ namespace ParuthidotExE
     public class Bacteria : MonoBehaviour
     {
         [SerializeField] GameObject[] faceReactions;
-        public BacteriaState state = BacteriaState.None;
+        BacteriaState state = BacteriaState.None;
+        [SerializeField] bool isHead = false;
 
         [SerializeField] IntChannelSO ChangePlayerStateEvent = default;
         [SerializeField] ParticleSystem ps;
+        [SerializeField] GameObject decalTile;
 
 
         private void OnEnable()
         {
-            PlayerController.ChangeStateAction += OnChangeBacteriaState;
+            if (isHead)
+                PlayerController.ChangeStateAction += OnChangeBacteriaState;
         }
 
 
         private void OnDisable()
         {
-            PlayerController.ChangeStateAction -= OnChangeBacteriaState;
+            if (isHead)
+                PlayerController.ChangeStateAction -= OnChangeBacteriaState;
         }
 
 
@@ -163,11 +167,17 @@ namespace ParuthidotExE
                     break;
                 case BacteriaState.Move:
                     transform.position += direction;
-                    ps.Play();
+                    if (transform.position.y < 1)// && transform.position.y + direction.y < 1)
+                    {
+                        GameObject curObj = GameObject.Instantiate(decalTile, transform.position, Quaternion.identity);
+                        DecalSplash decalSplash = curObj.GetComponent<DecalSplash>();
+                        decalSplash.ShowSplash();
+                        ps.Play();
+                    }
                     break;
                 case BacteriaState.Clone:
-                    GameObject newObj = GameObject.Instantiate(playerGreenObj);
                     transform.position += direction;
+                    GameObject newObj = GameObject.Instantiate(playerGreenObj, transform.position, Quaternion.identity);
                     break;
                 case BacteriaState.Destruct:
                     //playerGreen.transform.position += direction;

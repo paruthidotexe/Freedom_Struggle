@@ -24,7 +24,7 @@ namespace ParuthidotExE
         public static GridData GetGridData(int width, int height)
         {
             GridData gridData = new GridData(width, height);
-            int randomVal = Random.Range(0, 5);
+            int randomVal = 0;// andom.Range(0, 5);
 
             gridData.tiles = new int[,]
             {
@@ -47,16 +47,16 @@ namespace ParuthidotExE
                 gridData.tiles = new int[,]
                 {
                 { 1, 1, 1, 1, 1, 1 },
-                { 1, 128, 1, 1, 1, 1},
-                { 1, 1, 1, 1, 1, 1 },
                 { 1, 1, 1, 1, 1, 1},
                 { 1, 1, 1, 1, 1, 1 },
                 { 1, 1, 1, 1, 1, 1},
+                { 0, 0, 0, 1, 1, 1 },
+                { 0, 0, 0, 1, 1, 1},
                 { 1, 1, 1, 1, 1, 1},
                 { 1, 1, 1, 1, 1, 1},
                 { 1, 1, 1, 1, 1, 1},
                 { 1, 1, 1, 1, 1, 1},
-                { 1, 10, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1, 1 },
                 { 1, 1, 1, 1, 1, 1},
                 };
             }

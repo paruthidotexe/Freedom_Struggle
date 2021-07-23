@@ -94,9 +94,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - AlphaMid: 1
+    - AlphaMid: 0.5
     - AlphaValue: 0
-    - BorderWidth: 2
+    - BorderWidth: 3
     - Noise: 0
     - NoiseSpeed: 1
     - Transparent: 0

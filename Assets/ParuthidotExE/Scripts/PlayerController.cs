@@ -194,7 +194,7 @@ namespace ParuthidotExE
                 //Debug.Log("a7 " + context.control.variants);
                 //Debug.Log("a8 " + context.control.parent);
 
-                Debug.Log("OnPlayerStateAction " + context.control.displayName);
+                //Debug.Log("OnPlayerStateAction " + context.control.displayName);
                 Raise_CloneAction(context.control.displayName);
             }
         }
@@ -204,28 +204,19 @@ namespace ParuthidotExE
         {
             if (context.performed)
             {
-                Debug.Log("a1 " + context);
-                Debug.Log("a2 " + context.valueType);
-                ////Debug.Log("a3 " + context.ReadValueAsButton());
-                Debug.Log("a3 " + context.control);
-                Debug.Log("a4 " + context.control.displayName);
-                //Debug.Log("a5 " + context.control.name);
-                Debug.Log("a6 " + context.control.path);
-                //Debug.Log("a7 " + context.control.variants);
-                //Debug.Log("a8 " + context.control.parent);
-
-                Debug.Log("OnChangeStateAction " + context.control.displayName);
+                //Debug.Log("OnChangeStateAction " + context.control.displayName);
                 Raise_CloneAction(context.control.displayName);
             }
         }
-        // 2do
-        // As Scriptable objects class
-        // Scriptable events as channel
-        //
+
+
     }
 
 
 }
 
 
-
+// 2do
+// As Scriptable objects class
+// Scriptable events as channel
+//
