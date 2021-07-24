@@ -19,6 +19,10 @@ namespace ParuthidotExE
         [SerializeField] VoidChannelSO ChangeTheme;
         [SerializeField] IntChannelSO ChangePlayerStateEvent;
 
+
+        public delegate void OnStringDelegate(string val);
+        public static event OnStringDelegate ChangeStateAction;
+
         [SerializeField] ThemesDB themesDB;
 
         // ui input 
@@ -62,7 +66,7 @@ namespace ParuthidotExE
             if (scoreText != null && timeText != null)
             {
                 timeText.text = (int)GlobalData.timePlayed + " Seconds";
-                scoreText.text = "" + GlobalData.shapesCollected;
+                scoreText.text = "Moves: " + GlobalData.moves;
             }
         }
 
@@ -82,7 +86,8 @@ namespace ParuthidotExE
 
         public void OnRestartButton()
         {
-            RestartEvent.RaiseEvent();
+            SceneManager.LoadScene("PixelBacteria");
+            //RestartEvent.RaiseEvent();
         }
 
 
@@ -91,27 +96,27 @@ namespace ParuthidotExE
             Vector3 moveDir = Vector3.zero;
             if (dir == 1)
             {
-                moveDir.x = -1;
-                moveDir.y = 0;
+                moveDir.x = 0;
+                moveDir.y = 1;
                 moveDir.z = 0;
             }
             if (dir == 2)
             {
-                moveDir.x = 1;
-                moveDir.y = 0;
+                moveDir.x = 0;
+                moveDir.y = -1;
                 moveDir.z = 0;
             }
             if (dir == 3)
             {
-                moveDir.x = 0;
+                moveDir.x = -1;
                 moveDir.y = 0;
-                moveDir.z = 1;
+                moveDir.z = 0;
             }
             if (dir == 4)
             {
-                moveDir.x = 0;
+                moveDir.x = 1;
                 moveDir.y = 0;
-                moveDir.z = -1;
+                moveDir.z = 0;
             }
             Raise_OnMoveAction(moveDir);
         }
@@ -137,6 +142,38 @@ namespace ParuthidotExE
         }
 
 
+        public void OnUpArrowBtn()
+        {
+            OnMoveBtn(1);
+        }
+
+        public void OnDownArrowBtn()
+        {
+            OnMoveBtn(2);
+        }
+
+        public void OnLeftArrowBtn()
+        {
+            OnMoveBtn(3);
+        }
+
+        public void OnRightArrowBtn()
+        {
+            OnMoveBtn(4);
+        }
+        public void OnPrevBtn()
+        {
+            Debug.Log("OnPrevBtn");
+            Raise_ChangeStateAction("[");
+        }
+
+        public void OnNextBtn()
+        {
+            Debug.Log("OnNextBtn");
+            Raise_ChangeStateAction("]");
+        }
+
+
         // Events
         void Raise_OnMoveAction(Vector3 moveDir)
         {
@@ -157,6 +194,14 @@ namespace ParuthidotExE
             if (NextLevelEvent != null)
                 NextLevelEvent();
         }
+
+
+        void Raise_ChangeStateAction(string val)
+        {
+            if (ChangeStateAction != null)
+                ChangeStateAction(val);
+        }
+
 
 
         public void OnChangeBg()
@@ -184,7 +229,7 @@ namespace ParuthidotExE
 
         void UpdateStateText(int val)
         {
-            stateText.text = "State : " + val;
+            stateText.text = "Mode: " + ((BacteriaState)val).ToString();
         }
 
     }

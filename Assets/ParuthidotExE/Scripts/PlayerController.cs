@@ -49,7 +49,7 @@ namespace ParuthidotExE
                 ClickedAction(moveDir);
         }
 
-        void Raise_CloneAction(string val)
+        void Raise_ChangeStateAction(string val)
         {
             if (ChangeStateAction != null)
                 ChangeStateAction(val);
@@ -59,13 +59,43 @@ namespace ParuthidotExE
         // Input Editor hooks
         public void OnMoveInputAction(InputAction.CallbackContext context)
         {
+            //if (context.performed)
+            //{
+            //    //Debug.Log("OnMoveInputAction : " + context.ReadValue<Vector2>());
+            //    //Debug.Log(context.ReadValue<Vector3>());
+            //    moveDirInputAction = context.ReadValue<Vector2>();
+            //    moveDir.x = moveDirInputAction.x;
+            //    moveDir.y = moveDirInputAction.y;
+            //    moveDir.z = 0;
+            //    Raise_MoveAction(moveDir);
+            //}
+        }
+
+
+        public void OnMoveUpAction(InputAction.CallbackContext context)
+        {
             if (context.performed)
             {
-                //Debug.Log("OnMoveInputAction : " + context.ReadValue<Vector2>());
+                Debug.Log("OnMoveUp : " + context);
                 //Debug.Log(context.ReadValue<Vector3>());
-                moveDirInputAction = context.ReadValue<Vector2>();
-                moveDir.x = moveDirInputAction.x;
-                moveDir.y = moveDirInputAction.y;
+                //moveDirInputAction = context.ReadValue<Vector2>();
+                moveDir.x = 0;
+                moveDir.y = 1;
+                moveDir.z = 0;
+                Raise_MoveAction(moveDir);
+            }
+        }
+
+
+        public void OnMoveDownAction(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                Debug.Log("OnMoveDown : " + context);
+                //Debug.Log(context.ReadValue<Vector3>());
+                //moveDirInputAction = context.ReadValue<Vector2>();
+                moveDir.x = 0;
+                moveDir.y = -1;
                 moveDir.z = 0;
                 Raise_MoveAction(moveDir);
             }
@@ -97,36 +127,6 @@ namespace ParuthidotExE
                 moveDir.x = 1;
                 moveDir.y = 0;
                 moveDir.z = 0;
-                Raise_MoveAction(moveDir);
-            }
-        }
-
-
-        public void OnMoveUpAction(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                Debug.Log("OnMoveUp : " + context);
-                //Debug.Log(context.ReadValue<Vector3>());
-                //moveDirInputAction = context.ReadValue<Vector2>();
-                moveDir.x = 0;
-                moveDir.y = 0;
-                moveDir.z = 1;
-                Raise_MoveAction(moveDir);
-            }
-        }
-
-
-        public void OnMoveDownAction(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                Debug.Log("OnMoveDown : " + context);
-                //Debug.Log(context.ReadValue<Vector3>());
-                //moveDirInputAction = context.ReadValue<Vector2>();
-                moveDir.x = 0;
-                moveDir.y = 0;
-                moveDir.z = -1;
                 Raise_MoveAction(moveDir);
             }
         }
@@ -195,7 +195,7 @@ namespace ParuthidotExE
                 //Debug.Log("a8 " + context.control.parent);
 
                 //Debug.Log("OnPlayerStateAction " + context.control.displayName);
-                Raise_CloneAction(context.control.displayName);
+                Raise_ChangeStateAction(context.control.displayName);
             }
         }
 
@@ -205,7 +205,7 @@ namespace ParuthidotExE
             if (context.performed)
             {
                 //Debug.Log("OnChangeStateAction " + context.control.displayName);
-                Raise_CloneAction(context.control.displayName);
+                Raise_ChangeStateAction(context.control.displayName);
             }
         }
 

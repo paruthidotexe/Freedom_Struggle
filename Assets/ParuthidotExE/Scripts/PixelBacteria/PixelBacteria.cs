@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace ParuthidotExE
@@ -24,23 +25,25 @@ namespace ParuthidotExE
         GridData gridData;
         GridData playerGridData;
 
-        int levelWidth = 12;
+        int levelWidth = 10;
         int levelHeight = 6;
         // Level Tiles 0 = hole, 1 = floor, 2,3,4..9 = Wall height, 10 = Door, ?128 = player
-        int[,] levelTiles;
-        Vector2Int playerPos = Vector2Int.one;// j,i
+        int[,] levelTilesData;
+        Vector2Int playerPos = Vector2Int.one;
+        bool isGameOver = false;
 
         // Prefabs
-        public GameObject Tile_Blue_Prefab;
-        public GameObject Tile_Pink_Prefab;
+        [SerializeField] GameObject Tile_Blue_Prefab;
+        [SerializeField] GameObject Tile_Pink_Prefab;
 
         [SerializeField] VoidChannelSO GameOverEvent = default;
         [SerializeField] VoidChannelSO RestartEvent = default;
         [SerializeField] IntChannelSO ChangePlayerStateEvent = default;
 
         // LevelRoot
-        public GameObject LevelMap;
-        public GameObject Blue_LevelMap;
+        [SerializeField] GameObject levelMap;
+        [SerializeField] GameObject levelTilesRoot;
+        [SerializeField] GameObject playerTilesRoot;
 
         [SerializeField] GameObject playerGreenObj;
         [SerializeField] Bacteria playerGreen;
@@ -50,6 +53,7 @@ namespace ParuthidotExE
         {
             PlayerController.MoveAction += OnMove;
             PlayerController.ChangeStateAction += OnChangeBacteriaState;
+            HUDScripts.ChangeStateAction += OnChangeBacteriaState;
             HUDScripts.MoveAction += OnMove;
             HUDScripts.ReverseAction += OnReverse;
             HUDScripts.NextLevelEvent += OnNextLevel;
@@ -60,6 +64,7 @@ namespace ParuthidotExE
         {
             PlayerController.MoveAction -= OnMove;
             PlayerController.ChangeStateAction -= OnChangeBacteriaState;
+            HUDScripts.ChangeStateAction -= OnChangeBacteriaState;
             HUDScripts.MoveAction -= OnMove;
             HUDScripts.ReverseAction -= OnReverse;
             HUDScripts.NextLevelEvent -= OnNextLevel;
@@ -68,30 +73,41 @@ namespace ParuthidotExE
 
         void Start()
         {
-            levelTiles = new int[levelWidth, levelHeight];
+            levelTilesData = new int[levelWidth, levelHeight];
             //Random.InitState(128);
             gameState = GameStates.InGame;
             GlobalData.OnInit();
             gameTimer = new GameTimer();
             gameTimer.StartTimer();
-            Application.targetFrameRate = 30;
+            Application.targetFrameRate = 60;
             //levelMgr.LoadLevel();
             gridData = LevelDB.GetGridData(levelWidth, levelHeight);
-            levelTiles = gridData.tiles;
-            playerGridData = new GridData();
-            playerPos = new Vector2Int(5, 0);
+            levelTilesData = gridData.tiles;
+            playerGridData = new GridData(levelWidth, levelHeight);
+            playerPos = new Vector2Int(4, 0);
             Debug.Log(gridData.GetGridAsString());
             Debug.Log(playerGridData.GetGridAsString());
             CreateBlueLevel();
-            playerGreenObj.transform.position = new Vector3(0, 0, 0);
+            playerGreenObj.transform.position = new Vector3(-1, 0, 0);
+            GlobalData.moves = 0;
         }
 
 
         void Update()
         {
+            if (isGameOver)
+            {
+                levelTilesRoot.transform.position = new Vector3(-5, 0, 0);
+                return;
+            }
             GlobalData.timePlayed += Time.deltaTime;
             if (gameTimer != null)
                 gameTimer.Update();
+            if (GlobalData.timePlayed > 180)
+            {
+                GlobalData.GameOverState = "Time Up";
+                isGameOver = true;
+            }
         }
 
 
@@ -111,36 +127,46 @@ namespace ParuthidotExE
 
         public void OnMove(Vector3 direction)
         {
+            if (isGameOver)
+            {
+                return;
+            }
             // input -> save command + time -> command Execute
             // undi -> reverse command -> execute
-            playerGreen.OnMove(direction, Tile_Blue_Prefab);
-            playerPos.x += (int)direction.x;
-            playerPos.y += (int)direction.y;
-            playerGridData.SetTileValue(playerPos.x, playerPos.y, 128);
-            playerGridData.GetGridAsString();
-            //Debug.Log(direction);
-            //switch (playerGreen.state)
-            //{
-            //    case BacteriaState.None:
-            //        //playerGreen.transform.position += direction;
-            //        break;
-            //    case BacteriaState.Move:
-            //        playerGreenObj.transform.position += direction;
-            //        break;
-            //    case BacteriaState.Clone:
-            //        GameObject newObj = GameObject.Instantiate(playerGreenObj);
-            //        newObj.transform.position = playerGreenObj.transform.position;
-            //        playerGreenObj.transform.position += direction;
-            //        break;
-            //    case BacteriaState.Destruct:
-            //        //playerGreen.transform.position += direction;
-            //        break;
-            //}
-        }
-
-
-        public void OnChangeBacteriaState(string newStateStr)
-        {
+            if (playerGreen.state == BacteriaState.Move)
+            {
+                if (playerGridData.IsValidTile(playerPos.x + (int)direction.x, playerPos.y + (int)direction.y))
+                {
+                    GlobalData.moves++;
+                    playerPos.x += (int)direction.x;
+                    playerPos.y += (int)direction.y;
+                    playerGreen.OnMove(direction, Tile_Blue_Prefab, playerTilesRoot, false);
+                }
+            }
+            else if (playerGreen.state == BacteriaState.Clone)
+            {
+                if (playerGridData.IsValidTile(playerPos.x + (int)direction.x, playerPos.y + (int)direction.y))
+                {
+                    int tileVal = playerGridData.GetTileValue(playerPos.x + (int)direction.x, playerPos.y + (int)direction.y);
+                    bool isClone = true;
+                    if (tileVal == 128)
+                    {
+                        isClone = false;
+                    }
+                    playerGridData.SetTileValue(playerPos.x + (int)direction.x, playerPos.y + (int)direction.y, 128);
+                    GlobalData.moves++;
+                    playerPos.x += (int)direction.x;
+                    playerPos.y += (int)direction.y;
+                    playerGreen.OnMove(direction, Tile_Blue_Prefab, playerTilesRoot, isClone);
+                    Debug.Log(playerGridData.GetGridAsString());
+                }
+            }
+            isGameOver = CheckGameOver();
+            if (isGameOver)
+            {
+                GlobalData.GameOverState = "Success";
+                StartCoroutine(ChangeToGOScene());
+            }
         }
 
 
@@ -170,33 +196,98 @@ namespace ParuthidotExE
             Vector3 offset = new Vector3(-0.5f, 0, 0.5f);
             Vector3 origin = new Vector3(0, 0, 0);
 
-            Blue_LevelMap.transform.position = Vector3.zero;
-            foreach (Transform child in Blue_LevelMap.transform)
+            levelTilesRoot.transform.position = Vector3.zero;
+            foreach (Transform child in levelTilesRoot.transform)
             {
                 Destroy(child.gameObject);
             }
 
-            for (int i = 0; i < levelTiles.GetLength(0); i++)
+            for (int i = 0; i < levelTilesData.GetLength(0); i++)
             {
-                for (int j = 0; j < levelTiles.GetLength(1); j++)
+                for (int j = 0; j < levelTilesData.GetLength(1); j++)
                 {
-                    if (levelTiles[i, j] == 1)
+                    if (levelTilesData[i, j] == 1)
                     {
                         GameObject curObj = GameObject.Instantiate(Tile_Blue_Prefab);
                         curObj.transform.position = new Vector3(i, j, 0);
-                        curObj.transform.parent = Blue_LevelMap.transform;
+                        curObj.transform.parent = levelTilesRoot.transform;
                     }
-                    if (levelTiles[i, j] == 0)
+                    if (levelTilesData[i, j] == 0)
                     {
                         GameObject curObj = GameObject.Instantiate(Tile_Pink_Prefab);
                         curObj.transform.position = new Vector3(i, j, 0);
-                        curObj.transform.parent = Blue_LevelMap.transform;
+                        curObj.transform.parent = levelTilesRoot.transform;
                     }
                 }
             }
             //Blue_LevelMap.transform.position = new Vector3(-5.5f, -0.2f, -5.5f);
-            Blue_LevelMap.transform.position = new Vector3(-5f, -0.2f, 15f);
-            Blue_LevelMap.transform.parent = LevelMap.transform;
+            levelTilesRoot.transform.position = new Vector3(-5f, -0.2f, 15f);
+            levelTilesRoot.transform.parent = levelMap.transform;
+        }
+
+
+        // player control
+        public void OnChangeBacteriaState(string newStateStr)
+        {
+            if (newStateStr == "1")
+            {
+                OnChangeBacteriaState(BacteriaState.Move);
+            }
+            else if (newStateStr == "2")
+            {
+                OnChangeBacteriaState(BacteriaState.Clone);
+            }
+            else if (newStateStr == "3")
+            {
+                OnChangeBacteriaState(BacteriaState.Destruct);
+            }
+            else if (newStateStr == "4")
+            {
+                OnChangeBacteriaState(BacteriaState.None);
+            }
+
+            if (newStateStr == "[")
+            {
+                //OnPrevState(state);
+                playerGreen.OnPrevState();
+            }
+            else if (newStateStr == "]")
+            {
+                //OnNextState(state);
+                playerGreen.OnNextState();
+            }
+        }
+
+
+        void OnChangeBacteriaState(BacteriaState newState)
+        {
+            //state = newState;
+            ChangePlayerStateEvent.RaiseEvent((int)newState);
+            //ChangeFaceReaction(state);
+        }
+
+
+        bool CheckGameOver()
+        {
+            for (int i = 0; i < levelTilesData.GetLength(0); i++)
+            {
+                for (int j = 0; j < levelTilesData.GetLength(1); j++)
+                {
+                    if (levelTilesData[i, j] == 0)
+                    {
+                        if (playerGridData.tiles[i, j] != 128)
+                            return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+
+        IEnumerator ChangeToGOScene()
+        {
+            yield return new WaitForSeconds(2.0f);
+            SceneManager.LoadScene("GameOver");
         }
 
 

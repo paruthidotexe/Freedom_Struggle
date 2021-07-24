@@ -67,14 +67,26 @@ namespace ParuthidotExE
                 }
                 gridStr += "\n";
             }
-            Debug.Log(gridStr);
+            //Debug.Log(gridStr);
             return gridStr;
         }
 
 
-        public void SetTileValue(int x, int y, int value)
+        public bool IsValidTile(int x, int y)
         {
+            bool retVal = true;
+            if (x < 0 || y < 0 || x >= width || y >= width)
+                retVal = false;
+            return retVal;
+        }
+
+        public bool SetTileValue(int x, int y, int value)
+        {
+            bool retVal = true;
+            if (x < 0 || y < 0 || x >= width || y >= width)
+                retVal = false;
             tiles[x, y] = value;
+            return retVal;
         }
 
 

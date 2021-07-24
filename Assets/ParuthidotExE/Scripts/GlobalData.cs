@@ -21,6 +21,9 @@ namespace ParuthidotExE
         public static int totalShapes = 0;
         public static int shapesMissed = 0;
         public static ThemeData themeData;
+        public static int levelNo = 0;
+        public static int TotalLevels = 5;
+        public static string GameOverState = "Won";
 
         public GlobalData()
         {
@@ -34,6 +37,7 @@ namespace ParuthidotExE
             timePlayedInt = 0;
             moves = 0;
             score = 0;
+            GameOverState = "Won";
         }
 
 

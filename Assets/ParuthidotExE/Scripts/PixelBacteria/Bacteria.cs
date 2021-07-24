@@ -26,8 +26,8 @@ namespace ParuthidotExE
     public class Bacteria : MonoBehaviour
     {
         [SerializeField] GameObject[] faceReactions;
-        BacteriaState state = BacteriaState.None;
         [SerializeField] bool isHead = false;
+        public BacteriaState state = BacteriaState.None;
 
         [SerializeField] IntChannelSO ChangePlayerStateEvent = default;
         [SerializeField] ParticleSystem ps;
@@ -37,14 +37,14 @@ namespace ParuthidotExE
         private void OnEnable()
         {
             if (isHead)
-                PlayerController.ChangeStateAction += OnChangeBacteriaState;
+                ChangePlayerStateEvent.OnEventRaised += OnChangeBacteriaState;
         }
 
 
         private void OnDisable()
         {
             if (isHead)
-                PlayerController.ChangeStateAction -= OnChangeBacteriaState;
+                ChangePlayerStateEvent.OnEventRaised -= OnChangeBacteriaState;
         }
 
 
@@ -93,71 +93,14 @@ namespace ParuthidotExE
         }
 
 
-        public void OnChangeBacteriaState(string newStateStr)
+        void OnChangeBacteriaState(int newState)
         {
-            if (newStateStr == "1")
-            {
-                OnChangeBacteriaState(BacteriaState.Move);
-            }
-            else if (newStateStr == "2")
-            {
-                OnChangeBacteriaState(BacteriaState.Clone);
-            }
-            else if (newStateStr == "3")
-            {
-                OnChangeBacteriaState(BacteriaState.Destruct);
-            }
-            else if (newStateStr == "4")
-            {
-                OnChangeBacteriaState(BacteriaState.None);
-            }
-
-            if (newStateStr == "[")
-            {
-                OnPrevState(state);
-            }
-            else if (newStateStr == "]")
-            {
-                OnNextState(state);
-            }
-        }
-
-
-
-        void OnChangeBacteriaState(BacteriaState newState)
-        {
-            state = newState;
-            ChangePlayerStateEvent.RaiseEvent((int)state);
+            state = (BacteriaState)newState;
             ChangeFaceReaction(state);
         }
 
 
-        void OnPrevState(BacteriaState newState)
-        {
-            int curStateVal = (int)newState;
-            curStateVal--;
-            if (curStateVal < 0)
-                curStateVal = (int)(BacteriaState.Last) - 1;
-            newState = (BacteriaState)curStateVal;
-            Debug.Log(newState);
-            OnChangeBacteriaState(newState);
-        }
-
-
-        void OnNextState(BacteriaState newState)
-        {
-            int curStateVal = (int)newState;
-            curStateVal++;
-            if (curStateVal > (int)(BacteriaState.Last) - 1)
-            {
-                curStateVal = 0;
-            }
-            newState = (BacteriaState)curStateVal;
-            OnChangeBacteriaState(newState);
-        }
-
-
-        public void OnMove(Vector3 direction, GameObject playerGreenObj)
+        public void OnMove(Vector3 direction, GameObject playerGreenObj, GameObject parentObj, bool isClone)
         {
             //Debug.Log(direction);
             switch (state)
@@ -177,13 +120,44 @@ namespace ParuthidotExE
                     break;
                 case BacteriaState.Clone:
                     transform.position += direction;
-                    GameObject newObj = GameObject.Instantiate(playerGreenObj, transform.position, Quaternion.identity);
+                    if (isClone)
+                    {
+                        GameObject newObj = GameObject.Instantiate(playerGreenObj, transform.position, Quaternion.identity);
+                        newObj.transform.parent = parentObj.transform;
+                    }
                     break;
                 case BacteriaState.Destruct:
                     //playerGreen.transform.position += direction;
                     break;
             }
         }
+
+
+        public void OnPrevState()
+        {
+            int curStateVal = (int)state;
+            curStateVal--;
+            if (curStateVal < 0)
+            {
+                curStateVal = (int)(BacteriaState.Last) - 1;
+            }
+            //OnChangeBacteriaState(curStateVal);
+            ChangePlayerStateEvent.RaiseEvent(curStateVal);
+        }
+
+
+        public void OnNextState()
+        {
+            int curStateVal = (int)state;
+            curStateVal++;
+            if (curStateVal > (int)(BacteriaState.Last) - 1)
+            {
+                curStateVal = 0;
+            }
+            //OnChangeBacteriaState(curStateVal);
+            ChangePlayerStateEvent.RaiseEvent(curStateVal);
+        }
+
 
 
     }
