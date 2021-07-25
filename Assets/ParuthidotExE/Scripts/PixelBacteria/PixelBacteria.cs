@@ -44,7 +44,6 @@ namespace ParuthidotExE
         [SerializeField] GameObject levelMap;
         [SerializeField] GameObject levelTilesRoot;
         [SerializeField] GameObject playerTilesRoot;
-
         [SerializeField] GameObject playerGreenObj;
         [SerializeField] Bacteria playerGreen;
 
@@ -107,6 +106,7 @@ namespace ParuthidotExE
             {
                 GlobalData.GameOverState = "Time Up";
                 isGameOver = true;
+                StartCoroutine(ChangeToGOScene());
             }
         }
 
@@ -131,8 +131,6 @@ namespace ParuthidotExE
             {
                 return;
             }
-            // input -> save command + time -> command Execute
-            // undi -> reverse command -> execute
             if (playerGreen.state == BacteriaState.Move)
             {
                 if (playerGridData.IsValidTile(playerPos.x + (int)direction.x, playerPos.y + (int)direction.y))
@@ -245,7 +243,6 @@ namespace ParuthidotExE
             {
                 OnChangeBacteriaState(BacteriaState.None);
             }
-
             if (newStateStr == "[")
             {
                 //OnPrevState(state);
@@ -287,7 +284,7 @@ namespace ParuthidotExE
         IEnumerator ChangeToGOScene()
         {
             yield return new WaitForSeconds(2.0f);
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("PB_GameOver");
         }
 
 

@@ -32,7 +32,7 @@ namespace ParuthidotExE
 
         public void OnPlayBtn()
         {
-            SceneManager.LoadScene("PixelBacteria");
+            SceneManager.LoadScene("PB_InGame");
         }
 
         public void OnNextLevelBtn()
@@ -42,7 +42,7 @@ namespace ParuthidotExE
             {
                 GlobalData.levelNo = 1;
             }
-            SceneManager.LoadScene("PixelBacteria");
+            SceneManager.LoadScene("PB_InGame");
         }
 
 

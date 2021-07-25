@@ -19,7 +19,6 @@ namespace ParuthidotExE
         [SerializeField] VoidChannelSO ChangeTheme;
         [SerializeField] IntChannelSO ChangePlayerStateEvent;
 
-
         public delegate void OnStringDelegate(string val);
         public static event OnStringDelegate ChangeStateAction;
 
@@ -74,19 +73,19 @@ namespace ParuthidotExE
         // UI
         public void OnPauseButton()
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("PB_MainMenu");
         }
 
 
         public void OnHomeButton()
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("PB_MainMenu");
         }
 
 
         public void OnRestartButton()
         {
-            SceneManager.LoadScene("PixelBacteria");
+            SceneManager.LoadScene("PB_InGame");
             //RestartEvent.RaiseEvent();
         }
 

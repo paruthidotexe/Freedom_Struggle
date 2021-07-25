@@ -5141,7 +5141,7 @@ Transform:
   m_GameObject: {fileID: 8198164092613249904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_Children:
   - {fileID: 8525036687754260721}
   - {fileID: 1935428037135330606}
@@ -5196,6 +5196,7 @@ MonoBehaviour:
   - {fileID: 124255024161655441}
   - {fileID: 6367514455007770145}
   isHead: 1
+  state: 0
   ChangePlayerStateEvent: {fileID: 11400000, guid: 9f6241dc52b2cda44b92e2e18ff54f62, type: 2}
   ps: {fileID: 827339133}
   decalTile: {fileID: 3364601958792499649, guid: 2b57ae8ed7627fa43989e37e43b0a191, type: 3}
