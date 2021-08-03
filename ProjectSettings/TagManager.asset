@@ -12,9 +12,9 @@ TagManager:
   - Water
   - UI
   - ZTransparent
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Interactable
   - 
   - 
   - 

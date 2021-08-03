@@ -14,10 +14,10 @@ namespace ParuthidotExE
     {
         public int width = 8;
         public int height = 8;
-        public int length = 8;
+        public int depth = 8;
         public float cellSize = 1.0f;
 
-        public int gridAxis = 2;// 1 =  XY; 2 = XZ 
+        public int gridAxis = 1;// 1 =  XY; 2 = XZ 
         public int[,] tiles;
 
         public Vector3 orgin = Vector3.zero;
@@ -34,7 +34,7 @@ namespace ParuthidotExE
             width = newWidth;
             height = newHeight;
             if (gridAxis == 2)
-                length = newHeight;
+                depth = newHeight;
             InitGrid();
         }
 
@@ -42,7 +42,7 @@ namespace ParuthidotExE
         public void InitGrid()
         {
             if (gridAxis == 2)
-                height = length;
+                height = depth;
 
             tiles = new int[width, height];
             for (int i = 0; i < width; i++)
@@ -69,6 +69,13 @@ namespace ParuthidotExE
             }
             //Debug.Log(gridStr);
             return gridStr;
+        }
+
+
+
+        public void PrintGridAsString()
+        {
+            Debug.Log(GetGridAsString());
         }
 
 

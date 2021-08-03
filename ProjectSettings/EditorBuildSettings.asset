@@ -11,14 +11,20 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/ParuthidotExE/Scenes/TP_InGame.unity
     guid: 69b37b355efb7fc41904ddd07d9dfbd2
-  - enabled: 1
+  - enabled: 0
     path: Assets/ParuthidotExE/Scenes/PB_MainMenu.unity
     guid: f6cac201701c07e499a1802f7dbe52ec
-  - enabled: 1
+  - enabled: 0
     path: Assets/ParuthidotExE/Scenes/PB_InGame.unity
     guid: 25022b25302ede34192eb0d3d0a473fd
-  - enabled: 1
+  - enabled: 0
     path: Assets/ParuthidotExE/Scenes/PB_GameOver.unity
     guid: e2ed0c884c420a9498cd9f99e61dd0e0
+  - enabled: 0
+    path: Assets/ParuthidotExE/Scenes/Rythm_InGame.unity
+    guid: 9e461c082dc233f4894dc1a2b8b67126
+  - enabled: 1
+    path: Assets/ParuthidotExE/Scenes/Jig_Creator.unity
+    guid: fd0943a2d84fb0e46b04ca9a08f02bf4
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 01e957224f7c81046bdc4916383526a7, type: 2}

@@ -132,18 +132,31 @@ namespace ParuthidotExE
         }
 
 
-        public void OnLeftClickAction(InputAction.CallbackContext context)
+        public void OnTouchPosAction(InputAction.CallbackContext context)
         {
             if (context.performed)
             {
-                //Debug.Log("OnLeftClickAction" + context);
+                //Debug.Log("OnMousePosAction" + context);
+                mousePos = context.ReadValue<Vector2>();
+                //Debug.Log("OnMousePosAction" + mousePos);
+                //Vector3 newPos = Camera.current.ScreenToWorldPoint(mousePos);
+            }
+        }
+
+
+        public void OnTouchAction(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                Debug.Log("OnLeftClickAction" + context);
                 //Debug.Log("Tap Pos : " + context.ReadValue<Vector2>());
-                Vector3 newPos = Camera.main.ScreenToWorldPoint(mousePos);
-                newPos.z = 0.5f;
-                GameObject curTapPosObj = GameObject.Instantiate(tapPosObj);
-                curTapPosObj.transform.position = newPos;
-                //Debug.Log(mousePos + " vs " + newPos);
-                Raise_ClickedAction(newPos);
+                //Vector3 newPos = Camera.main.ScreenToWorldPoint(mousePos);
+                //newPos.z = 0.5f;
+                //GameObject curTapPosObj = GameObject.Instantiate(tapPosObj);
+                //curTapPosObj.transform.position = newPos;
+                Vector3 newPos = mousePos;
+                Debug.Log(mousePos + " vs " + newPos);
+                Raise_ClickedAction(mousePos);
             }
         }
 
@@ -154,18 +167,6 @@ namespace ParuthidotExE
             {
                 Debug.Log("OnTapAction" + context);
                 Debug.Log("Tap Pos : " + context.ReadValue<Vector2>());
-            }
-        }
-
-
-        public void OnMousePosAction(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                //Debug.Log("OnMousePosAction" + context);
-                mousePos = context.ReadValue<Vector2>();
-                //Debug.Log("OnMousePosAction" + mousePos);
-                //Vector3 newPos = Camera.current.ScreenToWorldPoint(mousePos);
             }
         }
 
