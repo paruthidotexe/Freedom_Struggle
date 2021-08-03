@@ -116,7 +116,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 58429553
-  m_SortingLayer: 8
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0700bb26f1b91fa4b82bbb9737f1155b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.1254902}
@@ -126,7 +126,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &9171446029771283862
@@ -146,7 +146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8543274681996066017
 Transform:
   m_ObjectHideFlags: 0
@@ -4947,8 +4947,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d090eeb90843b00479c8a6bf2abc438a, type: 2}
-  - {fileID: 2100000, guid: d090eeb90843b00479c8a6bf2abc438a, type: 2}
+  - {fileID: 2100000, guid: 5bdd0ee325a8008489127a8698033f2a, type: 2}
+  - {fileID: 2100000, guid: 7f30a3819e3b6dc48893fd89c7b4eb33, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4967,7 +4967,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1779037029
-  m_SortingLayer: 4
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0

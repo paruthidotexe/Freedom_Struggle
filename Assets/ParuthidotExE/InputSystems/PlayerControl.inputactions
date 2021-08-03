@@ -70,6 +70,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "TapAction",
+                    "type": "Button",
+                    "id": "a8603cef-f1cf-4b6f-af6e-0c29e7595b76",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "PlayerState",
                     "type": "Button",
                     "id": "8ac46b3f-8f91-40ab-b731-95c13cc2ee01",
@@ -425,55 +433,11 @@
                 {
                     "name": "",
                     "id": "bfce065f-92b5-46ae-ae17-1a9d710b1d35",
-                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "path": "<Touchscreen>/primaryTouch/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "TouchScreen",
                     "action": "TouchAction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3bbb941b-6f42-47ac-8884-329a8933f38e",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "PlayerState",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f0f52a99-a9cb-4cac-b26a-1262d6533399",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "PlayerState",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "da5d33ba-87c7-4164-8ea2-e79629f85a58",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "PlayerState",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "265c3ac1-d544-441d-ac9a-787ef5f437a1",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "PlayerState",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -496,28 +460,6 @@
                     "processors": "",
                     "groups": "GamePad",
                     "action": "PullPushAction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "39e18bff-8195-41c9-8d16-7b12a7b3cb6f",
-                    "path": "<Keyboard>/minus",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "SwitchState",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "45e612eb-07a0-4bb6-814c-9e08f5c8962b",
-                    "path": "<Keyboard>/equals",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "SwitchState",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -595,6 +537,94 @@
                     "processors": "",
                     "groups": "TouchScreen",
                     "action": "TouchPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7bd28d03-9e8d-4188-8ebe-ccbc47f091fd",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "TouchScreen",
+                    "action": "TapAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3dc6d44-20cb-4f02-bd83-2abf1233e759",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse",
+                    "action": "TapAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3bbb941b-6f42-47ac-8884-329a8933f38e",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "PlayerState",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0f52a99-a9cb-4cac-b26a-1262d6533399",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "PlayerState",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da5d33ba-87c7-4164-8ea2-e79629f85a58",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "PlayerState",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "265c3ac1-d544-441d-ac9a-787ef5f437a1",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "PlayerState",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "39e18bff-8195-41c9-8d16-7b12a7b3cb6f",
+                    "path": "<Keyboard>/minus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SwitchState",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45e612eb-07a0-4bb6-814c-9e08f5c8962b",
+                    "path": "<Keyboard>/equals",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SwitchState",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
