@@ -70,7 +70,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "TapAction",
+                    "name": "Tap",
                     "type": "Button",
                     "id": "a8603cef-f1cf-4b6f-af6e-0c29e7595b76",
                     "expectedControlType": "Button",
@@ -432,8 +432,8 @@
                 },
                 {
                     "name": "",
-                    "id": "bfce065f-92b5-46ae-ae17-1a9d710b1d35",
-                    "path": "<Touchscreen>/primaryTouch/press",
+                    "id": "454f3601-db3b-41ae-a331-ebee78e0864e",
+                    "path": "<Touchscreen>/primaryTouch/tap",
                     "interactions": "",
                     "processors": "",
                     "groups": "TouchScreen",
@@ -542,23 +542,23 @@
                 },
                 {
                     "name": "",
-                    "id": "7bd28d03-9e8d-4188-8ebe-ccbc47f091fd",
-                    "path": "<Touchscreen>/primaryTouch/tap",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "TouchScreen",
-                    "action": "TapAction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d3dc6d44-20cb-4f02-bd83-2abf1233e759",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse",
-                    "action": "TapAction",
+                    "action": "Tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7bd28d03-9e8d-4188-8ebe-ccbc47f091fd",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "TouchScreen",
+                    "action": "Tap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1021,7 +1021,7 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
-                    "isOptional": false,
+                    "isOptional": true,
                     "isOR": false
                 }
             ]

@@ -1,6 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+///-----------------------------------------------------------------------------
+///
+/// JigsawCreator
+/// 
+/// Jigsaw Creator
+///
+///-----------------------------------------------------------------------------
+
 using UnityEngine;
+
 
 namespace ParuthidotExE
 {
@@ -20,13 +27,13 @@ namespace ParuthidotExE
 
         private void OnEnable()
         {
-            PlayerController.ClickedAction += OnClickEvent;
+            InputMgr.ClickedAction += OnClickEvent;
         }
 
 
         private void OnDisable()
         {
-            PlayerController.ClickedAction += OnClickEvent;
+            InputMgr.ClickedAction -= OnClickEvent;
         }
 
 
@@ -174,6 +181,7 @@ namespace ParuthidotExE
 
 
 }
+
 
 //2do
 // ? Editor scripts(wasy dev) vs runtime(seemes better)

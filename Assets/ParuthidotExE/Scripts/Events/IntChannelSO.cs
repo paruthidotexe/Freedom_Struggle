@@ -2,7 +2,7 @@
 ///
 /// IntChannelSO
 /// 
-/// This class is used for Events that have no arguments 
+/// This class is used for Events that have integer arguments 
 ///
 ///-----------------------------------------------------------------------------
 

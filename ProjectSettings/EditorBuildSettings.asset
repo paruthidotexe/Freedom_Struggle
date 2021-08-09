@@ -23,8 +23,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/ParuthidotExE/Scenes/Rythm_InGame.unity
     guid: 9e461c082dc233f4894dc1a2b8b67126
-  - enabled: 1
+  - enabled: 0
     path: Assets/ParuthidotExE/Scenes/Jig_Creator.unity
     guid: fd0943a2d84fb0e46b04ca9a08f02bf4
+  - enabled: 1
+    path: Assets/ParuthidotExE/Scenes/Quiz_InGame.unity
+    guid: f9c1d4ef90ff9754db90c928a262d8f8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 01e957224f7c81046bdc4916383526a7, type: 2}

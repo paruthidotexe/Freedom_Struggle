@@ -50,8 +50,8 @@ namespace ParuthidotExE
 
         private void OnEnable()
         {
-            PlayerController.MoveAction += OnMove;
-            PlayerController.ChangeStateAction += OnChangeBacteriaState;
+            InputMgr.MoveAction += OnMove;
+            InputMgr.ChangeStateAction += OnChangeBacteriaState;
             HUDScripts.ChangeStateAction += OnChangeBacteriaState;
             HUDScripts.MoveAction += OnMove;
             HUDScripts.ReverseAction += OnReverse;
@@ -61,8 +61,8 @@ namespace ParuthidotExE
 
         private void OnDisable()
         {
-            PlayerController.MoveAction -= OnMove;
-            PlayerController.ChangeStateAction -= OnChangeBacteriaState;
+            InputMgr.MoveAction -= OnMove;
+            InputMgr.ChangeStateAction -= OnChangeBacteriaState;
             HUDScripts.ChangeStateAction -= OnChangeBacteriaState;
             HUDScripts.MoveAction -= OnMove;
             HUDScripts.ReverseAction -= OnReverse;
