@@ -67,7 +67,7 @@ namespace ParuthidotExE
                         curTray = trayLeft;
                     else
                         curTray = trayRight;
-                    curObj.transform.position = new Vector3(curTray.transform.position.x + i + i * 0.1f, curTray.transform.position.y + j + j * 0.1f, 0);
+                    curObj.transform.position = new Vector3(curTray.transform.position.x + i + i * 0.1f, curTray.transform.position.y + j + j * 0.1f + 2.0f, 0);
                     curObj.transform.parent = trayLeft.transform;
                     curObj.name = "JigTile_" + i + "_" + j;
                     // add values to script

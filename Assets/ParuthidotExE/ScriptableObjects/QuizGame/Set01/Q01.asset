@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 1
   question: When India got indiependance from British
-  sprite: {fileID: 0}
   imagePath: 
   totalChoices: 4
   choices:
@@ -24,3 +23,4 @@ MonoBehaviour:
   - 1900
   totalAnswers: 1
   answers: 00000000
+  selected: 00000000000000000000000000000000

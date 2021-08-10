@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4708726759f977946a989ef6a4d271e0, type: 3}
-  m_Name: Q02
+  m_Name: Q07
   m_EditorClassIdentifier: 
-  ID: 2
-  question: Republic day of india
+  ID: 7
+  question: Republic Year
   imagePath: 
   totalChoices: 4
   choices:
-  - 15 August
-  - 4 July
-  - 25 January
-  - 26 January
+  - 1947
+  - 1950
+  - 1951
+  - 1930
   totalAnswers: 1
-  answers: 03000000
+  answers: 01000000
   selected: 00000000000000000000000000000000

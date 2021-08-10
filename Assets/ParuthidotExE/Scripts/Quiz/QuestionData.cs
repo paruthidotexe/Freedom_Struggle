@@ -25,6 +25,7 @@ namespace ParuthidotExE
         public string[] choices; // answer as strings
         public int totalAnswers;
         public int[] answers; // index
+        public int[] selected; // choices
 
 
         public QuestionData()
@@ -37,6 +38,7 @@ namespace ParuthidotExE
             totalAnswers = 1;
             choices = new string[totalChoices];
             answers = new int[totalAnswers];
+            selected = new int[totalChoices];
         }
 
 
@@ -49,6 +51,17 @@ namespace ParuthidotExE
             //Debug.Log(questionDataStr);
             Debug.Log("JSON Data");
             Debug.Log(JsonUtility.ToJson(this));
+        }
+
+
+        public bool IsQuestionAttended()
+        {
+            for (int j = 0; j < selected.Length; j++)
+            {
+                if (selected[j] == 1)
+                    return true;
+            }
+            return false;
         }
 
 

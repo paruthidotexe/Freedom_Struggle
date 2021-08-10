@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
+    path: Assets/ParuthidotExE/Scenes/FS_GameList.unity
+    guid: 532b586eab2e3ec4c8161c9d5b327af0
+  - enabled: 0
     path: Assets/ParuthidotExE/Scenes/TP_MainMenu.unity
     guid: 56b6ad968fc73344f9eaa2e1a6d70053
   - enabled: 0
