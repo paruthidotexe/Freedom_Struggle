@@ -25,6 +25,10 @@ namespace ParuthidotExE
         JigPiece prevPiece;
         GridData solvedData;
 
+        float aspectRatio = 1;
+        float aspectWidth = 8;
+        float aspectHeight = 8;
+
         private void OnEnable()
         {
             InputMgr.ClickedAction += OnClickEvent;
@@ -54,8 +58,10 @@ namespace ParuthidotExE
 
         public void CreaeteJigsaw()
         {
-            gridData.orgin.x = -gridData.width / 2 + 0.5f;
-            gridData.orgin.y = -gridData.height / 2 + 0.5f;
+            float tileWidth = aspectWidth / gridData.width;
+            float tileHeight = aspectHeight / gridData.height;
+            gridData.orgin.x = -aspectWidth / 2 + tileWidth / 2.0f;
+            gridData.orgin.y = -aspectHeight / 2 + tileHeight / 2.0f;
             int tileCount = 0;
             for (int i = 0; i < gridData.width; i++)
             {
@@ -67,8 +73,12 @@ namespace ParuthidotExE
                         curTray = trayLeft;
                     else
                         curTray = trayRight;
-                    curObj.transform.position = new Vector3(curTray.transform.position.x + i + i * 0.1f, curTray.transform.position.y + j + j * 0.1f + 2.0f, 0);
+                    // same as in answer grid
+                    //curObj.transform.position = new Vector3(curTray.transform.position.x + i * tileWidth + i * 0.1f, curTray.transform.position.y + j * tileHeight + j * 0.1f + 2.0f, 0);
+                    curObj.transform.position = new Vector3(curTray.transform.position.x, tileCount * tileHeight + j * 0.1f, 0);
                     curObj.transform.parent = trayLeft.transform;
+                    curObj.transform.localScale = new Vector3(tileWidth, tileHeight, 1);
+
                     curObj.name = "JigTile_" + i + "_" + j;
                     // add values to script
                     JigPiece curPiece = curObj.GetComponent<JigPiece>();
@@ -87,9 +97,11 @@ namespace ParuthidotExE
                     gridData.tiles[i, j] = curPiece.ID;
                     tileCount++;
                     // bg empty tiles
+
                     curObj = GameObject.Instantiate(tilePrefabEmpty);
-                    curObj.transform.position = new Vector3(gridData.orgin.x + i, gridData.orgin.y + j, 0.2f);
+                    curObj.transform.position = new Vector3(gridData.orgin.x + i * tileWidth, gridData.orgin.y + j * tileHeight, 0.2f);
                     curObj.transform.parent = jigsawObj.transform;
+                    curObj.transform.localScale = new Vector3(tileWidth, tileHeight, 1);
                     curObj.name = "JigTileBG_" + i + "_" + j;
                 }
             }
@@ -192,4 +204,8 @@ namespace ParuthidotExE
 // maintain aspect ratio
 // save the cuts or runtime
 // save the cuts as seperate mesh using python + Blender
+// Aspect ratio solution
+// Use image box boundary to slice the image like in fb, youtube 
+// 
+// Resize Collider
 //

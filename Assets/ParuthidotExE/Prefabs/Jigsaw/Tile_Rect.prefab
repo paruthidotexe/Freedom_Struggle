@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6143898832850620117}
   - component: {fileID: 3626928224245085019}
   m_Layer: 9
-  m_Name: Tile_Jigsaw
+  m_Name: Tile_Rect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
