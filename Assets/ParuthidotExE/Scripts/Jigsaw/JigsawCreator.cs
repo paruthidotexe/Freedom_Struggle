@@ -18,9 +18,12 @@ namespace ParuthidotExE
         [SerializeField] GameObject tilePrefabEmpty;
         [SerializeField] GameObject tilePrefab;
         [SerializeField] GameObject levelMap;
-        [SerializeField] GameObject jigsawObj;
-        [SerializeField] GameObject trayLeft;
-        [SerializeField] GameObject trayRight;
+        [SerializeField] GameObject jigsawBoardBg;
+        [SerializeField] GameObject jigsawBoard;
+        [SerializeField] GameObject shelfLeft;
+        [SerializeField] GameObject shelfRight;
+        Shelf3D shelfLeftScript;
+        Shelf3D shelfRightScript;
 
         JigPiece prevPiece;
         GridData solvedData;
@@ -45,6 +48,8 @@ namespace ParuthidotExE
         {
             gridData = new GridData(gridDimension.x, gridDimension.y);
             solvedData = new GridData(gridDimension.x, gridDimension.y);
+            shelfLeftScript = shelfLeft.GetComponent<Shelf3D>();
+            shelfRightScript = shelfRight.GetComponent<Shelf3D>();
             CreaeteJigsaw();
         }
 
@@ -68,18 +73,19 @@ namespace ParuthidotExE
                 for (int j = 0; j < gridData.height; j++)
                 {
                     GameObject curObj = GameObject.Instantiate(tilePrefab);
-                    GameObject curTray;
-                    if (Random.Range(0, 2) == 1)
-                        curTray = trayLeft;
-                    else
-                        curTray = trayRight;
                     // same as in answer grid
                     //curObj.transform.position = new Vector3(curTray.transform.position.x + i * tileWidth + i * 0.1f, curTray.transform.position.y + j * tileHeight + j * 0.1f + 2.0f, 0);
-                    curObj.transform.position = new Vector3(curTray.transform.position.x, tileCount * tileHeight + j * 0.1f, 0);
-                    curObj.transform.parent = trayLeft.transform;
                     curObj.transform.localScale = new Vector3(tileWidth, tileHeight, 1);
-
                     curObj.name = "JigTile_" + i + "_" + j;
+                    if (Random.Range(0, 2) == 1)
+                    {
+                        shelfLeftScript.AddItem(curObj.transform);
+                    }
+                    else
+                    {
+                        shelfRightScript.AddItem(curObj.transform);
+                    }
+
                     // add values to script
                     JigPiece curPiece = curObj.GetComponent<JigPiece>();
                     curPiece.x = i;
@@ -97,10 +103,9 @@ namespace ParuthidotExE
                     gridData.tiles[i, j] = curPiece.ID;
                     tileCount++;
                     // bg empty tiles
-
                     curObj = GameObject.Instantiate(tilePrefabEmpty);
                     curObj.transform.position = new Vector3(gridData.orgin.x + i * tileWidth, gridData.orgin.y + j * tileHeight, 0.2f);
-                    curObj.transform.parent = jigsawObj.transform;
+                    curObj.transform.parent = jigsawBoardBg.transform;
                     curObj.transform.localScale = new Vector3(tileWidth, tileHeight, 1);
                     curObj.name = "JigTileBG_" + i + "_" + j;
                 }
@@ -112,16 +117,29 @@ namespace ParuthidotExE
         {
             RaycastHit hitInfo;
             Ray ray = Camera.main.ScreenPointToRay(pos);
-            Debug.Log(ray.origin + " -- " + ray.direction);
+            //Debug.Log(ray.origin + " -- " + ray.direction);
             if (Physics.Raycast(ray, out hitInfo))
             {
-                Debug.Log(hitInfo.collider.name);
-                if (hitInfo.collider.name.Contains("Tray"))
+                //Debug.Log(hitInfo.collider.name);
+                if (hitInfo.collider.name.Contains("Shelf Left"))
                 {
                     if (prevPiece != null)
                     {
                         prevPiece.transform.position = hitInfo.point - Vector3.forward * 0.3f;
                         prevPiece.OnDeSelect();
+                        shelfLeftScript.AddItem(prevPiece.transform);
+                        shelfRightScript.RemoveItem(prevPiece.transform);
+                        prevPiece = null;
+                    }
+                }
+                else if (hitInfo.collider.name.Contains("Shelf Right"))
+                {
+                    if (prevPiece != null)
+                    {
+                        prevPiece.transform.position = hitInfo.point - Vector3.forward * 0.3f;
+                        prevPiece.OnDeSelect();
+                        shelfRightScript.AddItem(prevPiece.transform);
+                        shelfLeftScript.RemoveItem(prevPiece.transform);
                         prevPiece = null;
                     }
                 }
@@ -131,7 +149,10 @@ namespace ParuthidotExE
                     {
                         solvedData.tiles[prevPiece.x, prevPiece.y] = prevPiece.ID;
                         prevPiece.transform.position = hitInfo.collider.transform.position - Vector3.forward * 0.3f;
+                        prevPiece.transform.parent = jigsawBoard.transform;
                         prevPiece.OnDeSelect();
+                        shelfLeftScript.RemoveItem(prevPiece.transform);
+                        shelfRightScript.RemoveItem(prevPiece.transform);
                         prevPiece = null;
                         gridData.PrintGridAsString();
                         solvedData.PrintGridAsString();

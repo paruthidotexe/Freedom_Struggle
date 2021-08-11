@@ -175,15 +175,15 @@ namespace ParuthidotExE
             {
                 if (touchPosText != null)
                     touchPosText.text = "OnTapAction" + mousePos;
-                Debug.Log("OnTapAction" + context);
+                //Debug.Log("OnTapAction" + context);
                 //Debug.Log("Tap Pos : " + context.ReadValue<Vector2>());
                 Vector3 newPos = mousePos; //Camera.main.ScreenToWorldPoint(mousePos);
-                newPos.z = 12;
+                newPos.z = 25;
                 newPos = Camera.main.ScreenToWorldPoint(newPos);
                 newPos.z = 0.5f;
                 GameObject curTapPosObj = GameObject.Instantiate(tapPosObj);
                 curTapPosObj.transform.position = newPos;
-                Debug.Log(mousePos + " vs " + newPos + "vs" + Camera.main.ScreenPointToRay(newPos).origin);
+                //Debug.Log(mousePos + " vs " + newPos + "vs" + Camera.main.ScreenPointToRay(newPos).origin);
                 Ray ray = Camera.main.ScreenPointToRay(mousePos);
                 Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
                 Raise_ClickedAction(mousePos);
