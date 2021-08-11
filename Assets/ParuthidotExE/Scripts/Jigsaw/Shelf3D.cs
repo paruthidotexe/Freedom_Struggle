@@ -16,8 +16,9 @@ namespace ParuthidotExE
     {
         [SerializeField] TMP_Text count;
         [SerializeField] List<Transform> itemList = new List<Transform>();
-        int shelfCount = 3;
-        float shelfHeight = 2.5f;
+        int rowCount = 3;
+        float shelfHeight = 12;
+        float rowHeight = 2.5f;
         float shelfStartYPos = -2.5f;
         float startYPos = -2.5f;
 
@@ -37,6 +38,7 @@ namespace ParuthidotExE
 
         void Start()
         {
+            //shelfCount = (int)(shelfHeight / rowHeight);
             count.text = "Pieces : 0";
         }
 
@@ -46,20 +48,29 @@ namespace ParuthidotExE
 
         }
 
+
+        public void SetRowHeight(float newHeight)
+        {
+            Debug.LogError(newHeight);
+            rowHeight = newHeight + 0.4f;
+            ArrangeItems();
+        }
+
+
         public void ArrangeItems()
         {
-            if (itemList.Count <= shelfCount)
+            if (itemList.Count <= rowCount)
                 startYPos = shelfStartYPos;
             for (int i = 0; i < itemList.Count; i++)
             {
-                itemList[i].position = new Vector3(transform.position.x, startYPos + i * shelfHeight, itemList[i].position.z);
+                itemList[i].position = new Vector3(transform.position.x, startYPos + i * rowHeight, itemList[i].position.z);
             }
-            if (itemList.Count > shelfCount && itemList[itemList.Count - 1].position.y < shelfStartYPos + (shelfCount - 1) * shelfHeight)
+            if (itemList.Count > rowCount && itemList[itemList.Count - 1].position.y < shelfStartYPos + (rowCount - 1) * rowHeight)
             {
-                startYPos += shelfHeight;
+                startYPos += rowHeight;
                 for (int i = 0; i < itemList.Count; i++)
                 {
-                    itemList[i].position = new Vector3(transform.position.x, startYPos + i * shelfHeight, itemList[i].position.z);
+                    itemList[i].position = new Vector3(transform.position.x, startYPos + i * rowHeight, itemList[i].position.z);
                 }
             }
         }
@@ -85,11 +96,11 @@ namespace ParuthidotExE
 
         public void ScrollUp()
         {
-            if (itemList.Count >= 3)
+            if (itemList.Count >= rowCount)
             {
                 if (itemList[0].position.y < shelfStartYPos)
                 {
-                    startYPos += shelfHeight;
+                    startYPos += rowHeight;
                 }
             }
             ArrangeItems();
@@ -98,12 +109,12 @@ namespace ParuthidotExE
 
         public void ScrollDown()
         {
-            if (itemList.Count >= 3)
+            if (itemList.Count >= rowCount)
             {
                 //Debug.LogError(itemList[itemList.Count - 1].position.y + " vs " + shelfStartYPos + shelfCount * shelfHeight);
-                if (itemList[itemList.Count - 1].position.y >= shelfStartYPos + shelfCount * shelfHeight)
+                if (itemList[itemList.Count - 1].position.y >= shelfStartYPos + rowCount * rowHeight)
                 {
-                    startYPos -= shelfHeight;
+                    startYPos -= rowHeight;
                 }
             }
             ArrangeItems();

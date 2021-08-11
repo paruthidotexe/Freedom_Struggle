@@ -29,8 +29,8 @@ namespace ParuthidotExE
         GridData solvedData;
 
         float aspectRatio = 1;
-        float aspectWidth = 8;
-        float aspectHeight = 8;
+        float aspectWidth = 10;
+        float aspectHeight = 10;
 
         private void OnEnable()
         {
@@ -67,6 +67,8 @@ namespace ParuthidotExE
             float tileHeight = aspectHeight / gridData.height;
             gridData.orgin.x = -aspectWidth / 2 + tileWidth / 2.0f;
             gridData.orgin.y = -aspectHeight / 2 + tileHeight / 2.0f;
+            shelfLeftScript.SetRowHeight(tileHeight);
+            shelfRightScript.SetRowHeight(tileHeight);
             int tileCount = 0;
             for (int i = 0; i < gridData.width; i++)
             {
