@@ -1,6 +1,6 @@
 ///-----------------------------------------------------------------------------
 ///
-/// JigsawShelf
+/// Shelf3D
 /// 
 /// Shelf to hold unised Jigsaw pieces 
 ///
@@ -16,11 +16,13 @@ namespace ParuthidotExE
     {
         [SerializeField] TMP_Text count;
         [SerializeField] List<Transform> itemList = new List<Transform>();
+        [SerializeField] GameObject itemContainer;
         int rowCount = 3;
         float shelfHeight = 12;
         float rowHeight = 2.5f;
         float shelfStartYPos = -2.5f;
         float startYPos = -2.5f;
+        float gapBetweenRows = 0.4f;
 
         [SerializeField] IntChannelSO TapEvent;
         [SerializeField] Collider scrollUpBtn;
@@ -31,15 +33,16 @@ namespace ParuthidotExE
             InputMgr.ClickedAction += OnTapped;
         }
 
+
         private void OnDisable()
         {
             InputMgr.ClickedAction -= OnTapped;
         }
 
+
         void Start()
         {
-            //shelfCount = (int)(shelfHeight / rowHeight);
-            count.text = "Pieces : 0";
+            //shelfCount = (int)(shelfHeight / rowHeight);            
         }
 
 
@@ -48,11 +51,16 @@ namespace ParuthidotExE
 
         }
 
+        public void Init()
+        {
+            count.text = "Pieces : 0";
+            DestroyAllObjects();
+        }
+
 
         public void SetRowHeight(float newHeight)
         {
-            Debug.LogError(newHeight);
-            rowHeight = newHeight + 0.4f;
+            rowHeight = newHeight + gapBetweenRows;
             ArrangeItems();
         }
 
@@ -75,10 +83,11 @@ namespace ParuthidotExE
             }
         }
 
+
         public void AddItem(Transform newItem)
         {
             itemList.Insert(0, newItem);
-            newItem.parent = transform;
+            newItem.parent = itemContainer.transform;
             ArrangeItems();
             count.text = "Pieces : " + itemList.Count;
         }
@@ -135,6 +144,21 @@ namespace ParuthidotExE
                 ScrollDown();
             }
         }
+
+
+
+        public void DestroyAllObjects()
+        {
+            itemList.Clear();
+            count.text = "Pieces : " + itemList.Count;
+            Transform[] allObjects = itemContainer.GetComponentsInChildren<Transform>();
+            foreach (Transform curTransform in allObjects)
+            {
+                if (curTransform.name != itemContainer.name)
+                    Destroy(curTransform.gameObject);
+            }
+        }
+
 
     }
 

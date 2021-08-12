@@ -19,11 +19,13 @@ namespace ParuthidotExE
         public int ID = 0;// 0 = none
         // not used in the image
         public int state = 0; // 0 : tray ; 16 : mouse; 8 : board; 9 : board correct
+        [SerializeField] MeshRenderer meshRenderer;
+        [SerializeField] GameObject selection;
         [SerializeField] ParticleSystem ps;
 
         void Start()
         {
-            ps.Stop();
+            OnDeSelect();
         }
 
 
@@ -36,14 +38,29 @@ namespace ParuthidotExE
         public void OnSelect()
         {
             ps.Play();
+            selection.SetActive(true);
         }
 
 
         public void OnDeSelect()
         {
             ps.Stop();
+            selection.SetActive(false);
         }
 
+
+        public void UpdateMaterials(Vector2 textureOffset, Vector2 textureScale)
+        {
+            if (meshRenderer != null)
+            {
+                meshRenderer.materials[0].mainTextureScale = textureScale;
+                meshRenderer.materials[0].mainTextureOffset = textureOffset;
+
+                meshRenderer.materials[1].mainTextureScale = textureScale;
+                meshRenderer.materials[1].mainTextureOffset = textureOffset;
+                Debug.Log(textureOffset + " : " + textureScale);
+            }
+        }
 
     }
 

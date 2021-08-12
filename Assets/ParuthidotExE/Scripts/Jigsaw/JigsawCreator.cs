@@ -7,7 +7,7 @@
 ///-----------------------------------------------------------------------------
 
 using UnityEngine;
-
+using TMPro;
 
 namespace ParuthidotExE
 {
@@ -32,6 +32,8 @@ namespace ParuthidotExE
         float aspectWidth = 10;
         float aspectHeight = 10;
 
+        public TMP_Text piecesCount;
+
         private void OnEnable()
         {
             InputMgr.ClickedAction += OnClickEvent;
@@ -46,11 +48,7 @@ namespace ParuthidotExE
 
         void Start()
         {
-            gridData = new GridData(gridDimension.x, gridDimension.y);
-            solvedData = new GridData(gridDimension.x, gridDimension.y);
-            shelfLeftScript = shelfLeft.GetComponent<Shelf3D>();
-            shelfRightScript = shelfRight.GetComponent<Shelf3D>();
-            CreaeteJigsaw();
+            ReStartGame(gridDimension.x, gridDimension.y);
         }
 
 
@@ -58,6 +56,27 @@ namespace ParuthidotExE
         {
             if (IsGameWon())
                 return;
+        }
+
+
+        void ReStartGame(int gridX, int gridY)
+        {
+            if (gridX < 2)
+                gridX = 2;
+            if (gridY < 2)
+                gridY = 2;
+
+            piecesCount.text = "Pieces : " + gridX * gridY;
+            gridDimension.x = gridX;
+            gridDimension.y = gridY;
+            gridData = new GridData(gridDimension.x, gridDimension.y);
+            solvedData = new GridData(gridDimension.x, gridDimension.y);
+            shelfLeftScript = shelfLeft.GetComponent<Shelf3D>();
+            shelfRightScript = shelfRight.GetComponent<Shelf3D>();
+            shelfLeftScript.Init();
+            shelfRightScript.Init();
+            DestroyAllObjects();
+            CreaeteJigsaw();
         }
 
 
@@ -92,15 +111,17 @@ namespace ParuthidotExE
                     JigPiece curPiece = curObj.GetComponent<JigPiece>();
                     curPiece.x = i;
                     curPiece.y = j;
-                    MeshRenderer meshRenderer = curObj.GetComponentInChildren<MeshRenderer>();
-                    Debug.Log(meshRenderer);
-                    if (meshRenderer != null)
-                    {
-                        Vector2 textureOffset = new Vector2(i / (float)gridData.width, j / (float)gridData.height);
-                        meshRenderer.material.mainTextureScale = new Vector2(1 / (float)gridData.width, 1 / (float)gridData.height);
-                        meshRenderer.material.mainTextureOffset = textureOffset;
-                        Debug.Log(textureOffset);
-                    }
+                    curPiece.UpdateMaterials(new Vector2(i / (float)gridData.width, j / (float)gridData.height),
+                        new Vector2(1 / (float)gridData.width, 1 / (float)gridData.height));
+                    //MeshRenderer meshRenderer = curObj.GetComponentInChildren<MeshRenderer>();
+                    //Debug.Log(meshRenderer);
+                    //if (meshRenderer != null)
+                    //{
+                    //    Vector2 textureOffset = new Vector2(i / (float)gridData.width, j / (float)gridData.height);
+                    //    meshRenderer.material.mainTextureScale = new Vector2(1 / (float)gridData.width, 1 / (float)gridData.height);
+                    //    meshRenderer.material.mainTextureOffset = textureOffset;
+                    //    Debug.Log(textureOffset);
+                    //}
                     curPiece.ID = tileCount + 1;
                     gridData.tiles[i, j] = curPiece.ID;
                     tileCount++;
@@ -192,6 +213,23 @@ namespace ParuthidotExE
         }
 
 
+        public void DestroyAllObjects()
+        {
+            Transform[] allObjects = jigsawBoardBg.GetComponentsInChildren<Transform>();
+            foreach (Transform curTransform in allObjects)
+            {
+                if (curTransform.name != jigsawBoardBg.name)
+                    Destroy(curTransform.gameObject);
+            }
+            allObjects = jigsawBoard.GetComponentsInChildren<Transform>();
+            foreach (Transform curTransform in allObjects)
+            {
+                if (curTransform.name != jigsawBoard.name)
+                    Destroy(curTransform.gameObject);
+            }
+        }
+
+
         #region UI
         public void OnCreaeteBtn()
         {
@@ -207,11 +245,43 @@ namespace ParuthidotExE
 
         public void OnRestartBtn()
         {
-
+            ReStartGame(gridDimension.x, gridDimension.y);
         }
+
+        public void OnHigherBtn()
+        {
+            ReStartGame(gridDimension.x + 1, gridDimension.y + 1);
+        }
+
+
+        public void OnLowerBtn()
+        {
+            ReStartGame(gridDimension.x - 1, gridDimension.y - 1);
+        }
+
+        public void OnHigherBtnX()
+        {
+            ReStartGame(gridDimension.x + 1, gridDimension.y);
+        }
+
+
+        public void OnLowerBtnX()
+        {
+            ReStartGame(gridDimension.x - 1, gridDimension.y);
+        }
+
+        public void OnHigherBtnY()
+        {
+            ReStartGame(gridDimension.x, gridDimension.y + 1);
+        }
+
+
+        public void OnLowerBtnY()
+        {
+            ReStartGame(gridDimension.x, gridDimension.y - 1);
+        }
+
         #endregion
-
-
     }
 
 
