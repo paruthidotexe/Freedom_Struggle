@@ -110,8 +110,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278585626
+  m_fontColor: {r: 0.101960786, g: 0.03529412, b: 0.023529412, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -404,7 +404,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b142617ee4c805a45b941f9e966f094f, type: 2}
+  - {fileID: 2100000, guid: 12591dcf2f859154588d9449cfd7ea7f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -478,9 +478,9 @@ MonoBehaviour:
   choiceText: {fileID: 1411832499}
   SetQuestionEvent: {fileID: 11400000, guid: 82423df781bf88f41b7f88e256a374c5, type: 2}
   TapEvent: {fileID: 11400000, guid: 56947dbaea4d4984194cab527e5f0a56, type: 2}
-  normalColor: {r: 0.7775454, g: 0.9528302, b: 0.8553038, a: 1}
-  highlightColor: {r: 0, g: 1, b: 0.07865167, a: 1}
-  selectedColor: {r: 0.41985583, g: 0.8018868, b: 0.41985583, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  highlightColor: {r: 0.6886792, g: 0.4484536, b: 0.40606087, a: 1}
+  selectedColor: {r: 0.3254902, g: 1, b: 0.78039217, a: 1}
   meshRenderer: {fileID: 6716529444207079004}
 --- !u!65 &1848468164
 BoxCollider:

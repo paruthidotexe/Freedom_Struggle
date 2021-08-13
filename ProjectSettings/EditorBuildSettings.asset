@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/ParuthidotExE/Scenes/FS_GameList.unity
     guid: 532b586eab2e3ec4c8161c9d5b327af0
   - enabled: 0
@@ -29,7 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ParuthidotExE/Scenes/Jig_Creator.unity
     guid: fd0943a2d84fb0e46b04ca9a08f02bf4
-  - enabled: 0
+  - enabled: 1
     path: Assets/ParuthidotExE/Scenes/Quiz_InGame.unity
     guid: f9c1d4ef90ff9754db90c928a262d8f8
   m_configObjects:

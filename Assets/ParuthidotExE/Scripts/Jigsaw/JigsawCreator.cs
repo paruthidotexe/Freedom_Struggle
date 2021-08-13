@@ -187,7 +187,7 @@ namespace ParuthidotExE
                     if (curPiece != null)
                     {
                         curPiece.OnSelect();
-                        if (prevPiece != null)
+                        if (prevPiece != null && prevPiece.ID != curPiece.ID)
                         {
                             prevPiece.OnDeSelect();
                         }
@@ -300,5 +300,7 @@ namespace ParuthidotExE
 // Aspect ratio solution
 // Use image box boundary to slice the image like in fb, youtube 
 // 
-// Resize Collider
+// on Tap raise the piece
+// drag and drop to the bg, tray
+// drop position indicator like shadow/laser 
 //

@@ -1945,6 +1945,17 @@ Transform:
   m_Father: {fileID: 216344586}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1343546259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3386865981022248955, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
+  m_PrefabInstance: {fileID: 3386865981527477264}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa9a4c61e097424cb5df66a9958728f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1382076166
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,7 +2149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d018300fc4697a4ea1d71f696525b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridDimension: {x: 8, y: 8}
+  gridDimension: {x: 4, y: 4}
   tilePrefabEmpty: {fileID: 4066735583853539112, guid: a665247a3d49c394e9daa87a5af7c4d6, type: 3}
   tilePrefab: {fileID: 6143898832850620119, guid: 847cce03f999c4740999747104fde027, type: 3}
   levelMap: {fileID: 1814670965}
@@ -4227,6 +4238,46 @@ PrefabInstance:
     - target: {fileID: 3386865981022248953, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
       propertyPath: m_Name
       value: InputMgr
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386865981022248954, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386865981022248954, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: d6efdff7-671c-4d91-ab4e-e3ff1e6572d1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386865981022248954, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: Action map/Press[/Mouse/press]
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386865981022248954, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386865981022248954, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386865981022248954, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1343546259}
+    - target: {fileID: 3386865981022248954, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386865981022248954, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPressAction
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386865981022248954, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ParuthidotExE.InputMgr, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386865981022248954, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3386865981022248955, guid: d6756fd5a62fb324e879e8bc274a3e8a, type: 3}
       propertyPath: touchPosText
