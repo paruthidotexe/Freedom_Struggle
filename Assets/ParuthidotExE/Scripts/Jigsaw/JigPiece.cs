@@ -49,6 +49,21 @@ namespace ParuthidotExE
         }
 
 
+        public void UpdateMaterials(Texture2D texture2D, Vector2 textureOffset, Vector2 textureScale)
+        {
+            if (meshRenderer != null)
+            {
+                meshRenderer.materials[0].mainTexture = texture2D;
+                meshRenderer.materials[0].mainTextureScale = textureScale;
+                meshRenderer.materials[0].mainTextureOffset = textureOffset;
+
+                meshRenderer.materials[1].mainTexture = texture2D;
+                meshRenderer.materials[1].mainTextureScale = textureScale;
+                meshRenderer.materials[1].mainTextureOffset = textureOffset;
+                Debug.Log(textureOffset + " : " + textureScale);
+            }
+        }
+
         public void UpdateMaterials(Vector2 textureOffset, Vector2 textureScale)
         {
             if (meshRenderer != null)

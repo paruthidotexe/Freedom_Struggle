@@ -94,10 +94,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - AlphaMid: 1
-    - BorderWidth: 1
+    - AlphaMid: 0.5
+    - BorderWidth: 0.5
     - Noise: 0
-    - NoiseSpeed: 10
+    - NoiseSpeed: 0.1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -125,8 +125,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - BorderColor: {r: 0.21711464, g: 0.38679248, b: 0.29252702, a: 1}
-    - TileColor: {r: 0.7764706, g: 0.9529412, b: 0.85490197, a: 1}
+    - BorderColor: {r: 0.35294116, g: 0.20784312, b: 0.16470584, a: 1}
+    - TileColor: {r: 0.65882355, g: 0.5882353, b: 0.44705886, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

@@ -12,7 +12,6 @@ using TMPro;
 
 namespace ParuthidotExE
 {
-
     public class QuizChoice : MonoBehaviour
     {
         [SerializeField] int choiceIndex = 0;
@@ -28,6 +27,7 @@ namespace ParuthidotExE
         [SerializeField] MeshRenderer meshRenderer;
         MaterialPropertyBlock propBlock;
         bool isSelected = false;
+
 
         private void OnEnable()
         {

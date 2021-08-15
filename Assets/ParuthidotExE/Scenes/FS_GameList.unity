@@ -159,8 +159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -190}
-  m_SizeDelta: {x: -40, y: 100}
+  m_AnchoredPosition: {x: 0, y: -383}
+  m_SizeDelta: {x: -60, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &40070015
 MonoBehaviour:
@@ -495,8 +495,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Jigsaw
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 922fe4cd8c7789a4ba72eace19868822, type: 2}
-  m_sharedMaterial: {fileID: 8608143657882299753, guid: 922fe4cd8c7789a4ba72eace19868822, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b830cc72e6240f409189591344764c1, type: 2}
+  m_sharedMaterial: {fileID: 7226829427443826207, guid: 7b830cc72e6240f409189591344764c1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -520,8 +520,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21
-  m_fontSizeBase: 21
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -588,7 +588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &139489824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -996,7 +996,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rythm
+  m_text: "Tippu Sultan \n[ upcoming ]"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 922fe4cd8c7789a4ba72eace19868822, type: 2}
   m_sharedMaterial: {fileID: 8608143657882299753, guid: 922fe4cd8c7789a4ba72eace19868822, type: 2}
@@ -1005,8 +1005,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288741375
-  m_fontColor: {r: 1, g: 1, b: 0.627451, a: 1}
+    rgba: 4281181369
+  m_fontColor: {r: 0.7264151, g: 0.64280254, b: 0.17475079, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2197,8 +2197,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -70}
-  m_SizeDelta: {x: -40, y: 100}
+  m_AnchoredPosition: {x: 0, y: -148}
+  m_SizeDelta: {x: -60, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &947454877
 MonoBehaviour:
@@ -2291,7 +2291,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Quiz_InGame
+          m_StringArgument: Jig_Menu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1091514863
@@ -2793,7 +2793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1336804858
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3141,7 +3141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1493881360
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3595,7 +3595,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pixel Bacteria
+  m_text: 'Bhagat singh
+
+    [ upcoming ]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 922fe4cd8c7789a4ba72eace19868822, type: 2}
   m_sharedMaterial: {fileID: 8608143657882299753, guid: 922fe4cd8c7789a4ba72eace19868822, type: 2}
@@ -3604,8 +3606,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288741375
-  m_fontColor: {r: 1, g: 1, b: 0.627451, a: 1}
+    rgba: 4281181369
+  m_fontColor: {r: 0.7264151, g: 0.64280254, b: 0.17475079, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3731,8 +3733,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quiz
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 922fe4cd8c7789a4ba72eace19868822, type: 2}
-  m_sharedMaterial: {fileID: 8608143657882299753, guid: 922fe4cd8c7789a4ba72eace19868822, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b830cc72e6240f409189591344764c1, type: 2}
+  m_sharedMaterial: {fileID: 7226829427443826207, guid: 7b830cc72e6240f409189591344764c1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3756,8 +3758,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21
-  m_fontSizeBase: 21
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

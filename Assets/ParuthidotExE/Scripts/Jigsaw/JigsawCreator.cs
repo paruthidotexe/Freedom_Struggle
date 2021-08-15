@@ -25,12 +25,17 @@ namespace ParuthidotExE
         Shelf3D shelfLeftScript;
         Shelf3D shelfRightScript;
 
+        [SerializeField] JigsawPicData[] jigsawPicDataArray;
+        JigsawPicData jigsawPicData;
+
         JigPiece prevPiece;
         GridData solvedData;
 
         float aspectRatio = 1;
         float aspectWidth = 10;
         float aspectHeight = 10;
+        float jigsawWidth = 10;
+
 
         public TMP_Text piecesCount;
 
@@ -61,12 +66,38 @@ namespace ParuthidotExE
 
         void ReStartGame(int gridX, int gridY)
         {
-            if (gridX < 2)
-                gridX = 2;
-            if (gridY < 2)
-                gridY = 2;
+            aspectWidth = jigsawWidth;
+            aspectHeight = jigsawWidth;
+            jigsawPicData = jigsawPicDataArray[0];
+            for (int i = 0; i < jigsawPicDataArray.Length; i++)
+            {
+                if (jigsawPicDataArray[i].ID == GlobalData.selectedPicID)
+                    jigsawPicData = jigsawPicDataArray[i];
+            }
+            if (jigsawPicData.aspectHeight > jigsawPicData.aspectWidth)
+            {
+                aspectHeight = 10;
+                aspectWidth = jigsawPicData.aspectWidth * 10.0f / jigsawPicData.aspectHeight;
+            }
+            else if (jigsawPicData.aspectHeight < jigsawPicData.aspectWidth)
+            {
+                aspectWidth = 10;
+                aspectHeight = jigsawPicData.aspectHeight * 10.0f / jigsawPicData.aspectWidth;
+            }
+            else
+            {
+                aspectHeight = 10;
+                aspectWidth = 10;
+            }
+            gridX = (int)jigsawPicData.aspectWidth;
+            gridY = (int)jigsawPicData.aspectHeight;
 
-            piecesCount.text = "Pieces : " + gridX * gridY;
+            if (gridX < 3)
+                gridX = 3;
+            if (gridY < 3)
+                gridY = 3;
+            if (piecesCount != null)
+                piecesCount.text = "Pieces : " + gridX * gridY;
             gridDimension.x = gridX;
             gridDimension.y = gridY;
             gridData = new GridData(gridDimension.x, gridDimension.y);
@@ -111,7 +142,7 @@ namespace ParuthidotExE
                     JigPiece curPiece = curObj.GetComponent<JigPiece>();
                     curPiece.x = i;
                     curPiece.y = j;
-                    curPiece.UpdateMaterials(new Vector2(i / (float)gridData.width, j / (float)gridData.height),
+                    curPiece.UpdateMaterials(jigsawPicData.texture2D, new Vector2(i / (float)gridData.width, j / (float)gridData.height),
                         new Vector2(1 / (float)gridData.width, 1 / (float)gridData.height));
                     //MeshRenderer meshRenderer = curObj.GetComponentInChildren<MeshRenderer>();
                     //Debug.Log(meshRenderer);

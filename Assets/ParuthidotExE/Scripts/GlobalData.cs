@@ -25,6 +25,12 @@ namespace ParuthidotExE
         public static int TotalLevels = 5;
         public static string GameOverState = "Won";
 
+        /// <summary>
+        ///  jigsaw, quiz
+        /// </summary>
+        /// 
+        public static int selectedPicID = 0;
+
         public GlobalData()
         {
             themeData = ScriptableObject.CreateInstance<ThemeData>();
