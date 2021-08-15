@@ -168,7 +168,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2d5b0aae65bd13f4b90e67d1aaaae12d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -560,11 +560,13 @@ MonoBehaviour:
   musicAudioSrcList:
   - {fileID: 6816484890180063421}
   - {fileID: 6816484888914681397}
+  - {fileID: 6816484888914681397}
   sfxAudioSrcList:
   - {fileID: 6816484889889368321}
   - {fileID: 6816484889123437334}
   - {fileID: 6816484888735490849}
   - {fileID: 6816484889021238369}
+  musicList: []
   Clip_Click: {fileID: 8300000, guid: f96855f29a483cc488716c251ac51a69, type: 3}
   Clip_Ok: {fileID: 8300000, guid: 52569fa06c27a8e438f4615d9feb669d, type: 3}
   Clip_Cancel: {fileID: 8300000, guid: bf9bf345e8365a843ae69f7533f5d3dc, type: 3}
@@ -740,8 +742,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 12e1a25832e09b84d9a7717811c747b7, type: 3}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 3fea01f9186e0184f9b2966999389976, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1

@@ -9,6 +9,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
 namespace ParuthidotExE
 {
     public class GlobalData
@@ -30,6 +32,7 @@ namespace ParuthidotExE
         /// </summary>
         /// 
         public static int selectedPicID = 0;
+        public static int piecesCount = 0;
 
         public GlobalData()
         {

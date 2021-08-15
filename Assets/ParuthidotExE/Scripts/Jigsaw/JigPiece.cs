@@ -37,15 +37,19 @@ namespace ParuthidotExE
 
         public void OnSelect()
         {
-            ps.Play();
-            selection.SetActive(true);
+            if (ps != null)
+                ps.Play();
+            if (selection != null)
+                selection.SetActive(true);
         }
 
 
         public void OnDeSelect()
         {
-            ps.Stop();
-            selection.SetActive(false);
+            if (ps != null)
+                ps.Stop();
+            if (selection != null)
+                selection.SetActive(false);
         }
 
 

@@ -34,7 +34,8 @@ namespace ParuthidotExE
             for (int i = 0; i < jigsawPicDatas.Length; i++)
             {
                 GameObject curObj = GameObject.Instantiate(gridElementPrefab);
-                curObj.transform.parent = choosePhotoGrid.transform;
+                curObj.transform.SetParent(choosePhotoGrid.transform);
+                //curObj.transform.parent = choosePhotoGrid.transform;
                 GridElementUI gridElementUI = curObj.GetComponent<GridElementUI>();
                 gridElementUI.SetJigsawPicData(jigsawPicDatas[i]);
             }

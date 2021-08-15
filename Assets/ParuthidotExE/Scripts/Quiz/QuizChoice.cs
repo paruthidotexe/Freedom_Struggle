@@ -26,6 +26,7 @@ namespace ParuthidotExE
         [SerializeField] Color selectedColor;
         [SerializeField] MeshRenderer meshRenderer;
         MaterialPropertyBlock propBlock;
+        bool isCheckbox = false;
         bool isSelected = false;
 
 
@@ -78,7 +79,10 @@ namespace ParuthidotExE
             Ray ray = Camera.main.ScreenPointToRay(pos);
             if (btnCollider.Raycast(ray, out hitInfo, 20))
             {
-                isSelected = !isSelected;
+                if (isCheckbox)
+                    isSelected = !isSelected;
+                else
+                    isSelected = true;
                 //Debug.Log("RaiseEvent : " + choiceIndex);
                 TapEvent.RaiseEvent(choiceIndex);
                 UpdateColors();

@@ -8,6 +8,8 @@
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 
 namespace ParuthidotExE
@@ -31,8 +33,18 @@ namespace ParuthidotExE
         [SerializeField] QuizChoice[] quizChoices;
 
 
+        bool isGameOver = false;
+        [SerializeField] GameObject gamePanel;
+        [SerializeField] GameObject gameOverPanel;
+        [SerializeField] TMP_Text gameOverText;
+        [SerializeField] TMP_Text timerText;
+        [SerializeField] StarsUI starsUI;
+
+        int life = 3;
+
         // debug
-        bool isQuestionLoop = true;
+        bool isQuestionLoop = false;
+        bool isLoadingQuestion = false;
 
 
         private void OnEnable()
@@ -49,31 +61,39 @@ namespace ParuthidotExE
 
         void Start()
         {
+            AudioMgr.Inst.OnPlayMusic();
+            OnStartGameUI();
             questionSet = questionDB.GetQuestionDatas();
             questionDB.PrintData();
             ShuffleQuestionOrder();
             Debug.Log(questionSet.Length);
             //questionDatas[0].PrintData();
             totalQuestions = questionSet.Length;
+            life = 3;
+            starsUI.SetStars(life);
             StartCoroutine(WaitForLoading());
         }
 
 
         void Update()
         {
+            if (isGameOver)
+                return;
             timer += Time.deltaTime;
-            GlobalData.timePlayed = timer;// questionTime + 1 - timer
-            //if (timer > questionTime)
-            //{
-            //    attendedQuestionsCount += 1;
-            //    LoadNextQuestion();
-            //}
+            GlobalData.timePlayed += Time.deltaTime;
+            if (timerText != null)
+                timerText.text = (int)(questionTime + 1 - timer) + " Sec";
+            if (timer > questionTime)
+            {
+                LoseLife();
+                LoadNextQuestion();
+            }
         }
 
 
         IEnumerator WaitForLoading()
         {
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(1.0f);
             LoadQuestion();
             yield return null;
         }
@@ -81,7 +101,6 @@ namespace ParuthidotExE
 
         void LoadPrevQuestion()
         {
-            //timer = 0;
             questionIndex--;
             if (questionIndex < 0)
             {
@@ -93,18 +112,28 @@ namespace ParuthidotExE
 
         void LoadNextQuestion()
         {
-            //timer = 0;
             questionIndex++;
             if (questionIndex >= totalQuestions)
             {
                 if (!isQuestionLoop)
                 {
+                    questionIndex = totalQuestions;
                     GameOver();
                     return;
                 }
                 questionIndex = 0;
             }
             LoadQuestion();
+        }
+
+
+        IEnumerator LoadNextQuestionDelay()
+        {
+            isLoadingQuestion = true;
+            yield return new WaitForSeconds(1.0f);
+            LoadNextQuestion();
+            isLoadingQuestion = false;
+            yield return null;
         }
 
 
@@ -123,6 +152,8 @@ namespace ParuthidotExE
                     quizChoices[i].SetSelection(true);
                 }
             }
+
+            timer = 0;
         }
 
 
@@ -140,6 +171,8 @@ namespace ParuthidotExE
 
         void OnTappedAnswer(int val)
         {
+            if (isLoadingQuestion)
+                return;
             if (val == 127)
             {
                 LoadPrevQuestion();
@@ -148,14 +181,25 @@ namespace ParuthidotExE
             {
                 LoadNextQuestion();
             }
-            else if (questionSet[questionIndex].selected[val - 1] == 1)
+            //else if (questionSet[questionIndex].selected[val - 1] == 1)
+            //{
+            //    questionSet[questionIndex].selected[val - 1] = 0;
+            //    PrintAttendedQuestions();
+            //}
+            else if (val == 256)
             {
-                questionSet[questionIndex].selected[val - 1] = 0;
-                PrintAttendedQuestions();
+                OnBackBtn();
             }
             else
             {
+                attendedQuestionsCount += 1;
                 questionSet[questionIndex].selected[val - 1] = 1;
+                Debug.LogWarning((val - 1) + " : " + questionSet[questionIndex].answers[0] + "vs" + questionSet[questionIndex].selected[val - 1]);
+                if (questionSet[questionIndex].answers[0] != val - 1)
+                {
+                    LoseLife();
+                }
+                StartCoroutine(LoadNextQuestionDelay());
                 PrintAttendedQuestions();
             }
         }
@@ -176,12 +220,45 @@ namespace ParuthidotExE
         }
 
 
+        void LoseLife()
+        {
+            life -= 1;
+            attendedQuestionsCount--;
+            if (attendedQuestionsCount < 0)
+                attendedQuestionsCount = 0;
+            starsUI.SetStars(life);
+            if (life <= 0)
+            {
+                GameOver();
+            }
+        }
+
 
         void GameOver()
         {
-
+            isGameOver = true;
+            OnGameOverUI();
+            gameOverText.text = "Time : " + (int)GlobalData.timePlayed + " Seconds\n" + "Correct : " + (attendedQuestionsCount) + " out of " + totalQuestions;
         }
 
+        public void OnStartGameUI()
+        {
+            gameOverPanel.SetActive(false);
+            gamePanel.SetActive(true);
+        }
+
+
+        public void OnGameOverUI()
+        {
+            gameOverPanel.SetActive(true);
+            gamePanel.SetActive(false);
+        }
+
+
+        public void OnBackBtn()
+        {
+            SceneManager.LoadScene("Quiz_Menu");
+        }
 
     }
 

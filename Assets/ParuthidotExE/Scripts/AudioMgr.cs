@@ -38,6 +38,7 @@ namespace ParuthidotExE
         int musicVolume = 100;
         int sfxVolume = 100;
 
+        public AudioClip[] musicList;
         public AudioClip Clip_Click;
         public AudioClip Clip_Ok;
         public AudioClip Clip_Cancel;
@@ -80,8 +81,11 @@ namespace ParuthidotExE
         public void OnPlayMusic()
         {
             musicChannel = 0;
-            //musicAudioSrcList[musicIndex].clip;
-            musicAudioSrcList[musicChannel].Play();
+            if (musicList.Length > 0)
+            {
+                musicAudioSrcList[musicChannel].clip = musicList[Random.Range(0, 2)];
+                musicAudioSrcList[musicChannel].Play();
+            }
         }
 
 

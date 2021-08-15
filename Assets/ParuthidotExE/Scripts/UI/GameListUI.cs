@@ -16,7 +16,6 @@ namespace ParuthidotExE
 
         void Start()
         {
-
         }
 
         void Update()
@@ -26,6 +25,7 @@ namespace ParuthidotExE
 
         public void OnOpenGame(string sceneNameStr)
         {
+            AudioMgr.Inst.OnPlaySFX(SFXValues.SFX_Click);
             SceneManager.LoadScene(sceneNameStr);
         }
 
@@ -33,5 +33,4 @@ namespace ParuthidotExE
 
 
 }
-
 

@@ -7,7 +7,9 @@
 ///-----------------------------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 namespace ParuthidotExE
 {
@@ -28,6 +30,9 @@ namespace ParuthidotExE
         [SerializeField] JigsawPicData[] jigsawPicDataArray;
         JigsawPicData jigsawPicData;
 
+        [SerializeField] GameObject gamePanel;
+        [SerializeField] GameObject gameOverPanel;
+
         JigPiece prevPiece;
         GridData solvedData;
 
@@ -36,8 +41,15 @@ namespace ParuthidotExE
         float aspectHeight = 10;
         float jigsawWidth = 10;
 
+        public TMP_Text piecesCountText;
+        public TMP_Text timerText;
+        public TMP_Text movesText;
 
-        public TMP_Text piecesCount;
+        public TMP_Text GO_piecesCountText;
+        public TMP_Text GO_timerText;
+        public TMP_Text GO_movesText;
+        TimeSpan timeSpan;
+        bool isGameOver = false;
 
         private void OnEnable()
         {
@@ -53,19 +65,28 @@ namespace ParuthidotExE
 
         void Start()
         {
-            ReStartGame(gridDimension.x, gridDimension.y);
+            InitGame(gridDimension.x, gridDimension.y);
         }
 
 
         void Update()
         {
+            if (isGameOver)
+                return;
             if (IsGameWon())
                 return;
+            GlobalData.timePlayed += Time.deltaTime;
+            if (timerText != null)
+                timerText.text = "Time\n" + GetTimeAsString();
+            if (movesText != null)
+                movesText.text = "Moves\n" + GlobalData.moves;
         }
 
 
-        void ReStartGame(int gridX, int gridY)
+        void InitGame(int gridX, int gridY)
         {
+            AudioMgr.Inst.OnPlayMusic();
+
             aspectWidth = jigsawWidth;
             aspectHeight = jigsawWidth;
             jigsawPicData = jigsawPicDataArray[0];
@@ -96,8 +117,6 @@ namespace ParuthidotExE
                 gridX = 3;
             if (gridY < 3)
                 gridY = 3;
-            if (piecesCount != null)
-                piecesCount.text = "Pieces : " + gridX * gridY;
             gridDimension.x = gridX;
             gridDimension.y = gridY;
             gridData = new GridData(gridDimension.x, gridDimension.y);
@@ -108,6 +127,17 @@ namespace ParuthidotExE
             shelfRightScript.Init();
             DestroyAllObjects();
             CreaeteJigsaw();
+
+            // GlobalData
+            GlobalData.timePlayed = 0;
+            GlobalData.moves = 0;
+            GlobalData.piecesCount = gridX * gridY;
+            // UI
+            OnStartGameUI();
+            piecesCountText.text = "Pieces\n" + GlobalData.piecesCount;
+            timerText.text = "Time\n" + (int)GlobalData.timePlayed;
+            movesText.text = "Moves\n" + GlobalData.moves;
+            isGameOver = false;
         }
 
 
@@ -129,7 +159,7 @@ namespace ParuthidotExE
                     //curObj.transform.position = new Vector3(curTray.transform.position.x + i * tileWidth + i * 0.1f, curTray.transform.position.y + j * tileHeight + j * 0.1f + 2.0f, 0);
                     curObj.transform.localScale = new Vector3(tileWidth, tileHeight, 1);
                     curObj.name = "JigTile_" + i + "_" + j;
-                    if (Random.Range(0, 2) == 1)
+                    if (UnityEngine.Random.Range(0, 2) == 1)
                     {
                         shelfLeftScript.AddItem(curObj.transform);
                     }
@@ -158,6 +188,10 @@ namespace ParuthidotExE
                     tileCount++;
                     // bg empty tiles
                     curObj = GameObject.Instantiate(tilePrefabEmpty);
+                    curPiece = curObj.GetComponent<JigPiece>();
+                    curPiece.x = i;
+                    curPiece.y = j;
+                    curPiece.ID = tileCount + 1;
                     curObj.transform.position = new Vector3(gridData.orgin.x + i * tileWidth, gridData.orgin.y + j * tileHeight, 0.2f);
                     curObj.transform.parent = jigsawBoardBg.transform;
                     curObj.transform.localScale = new Vector3(tileWidth, tileHeight, 1);
@@ -179,29 +213,49 @@ namespace ParuthidotExE
                 {
                     if (prevPiece != null)
                     {
+                        solvedData.tiles[prevPiece.x, prevPiece.y] = 0;
                         prevPiece.transform.position = hitInfo.point - Vector3.forward * 0.3f;
                         prevPiece.OnDeSelect();
                         shelfLeftScript.AddItem(prevPiece.transform);
                         shelfRightScript.RemoveItem(prevPiece.transform);
                         prevPiece = null;
+                        GlobalData.moves += 1;
+                        gridData.PrintGridAsString();
+                        solvedData.PrintGridAsString();
                     }
                 }
                 else if (hitInfo.collider.name.Contains("Shelf Right"))
                 {
                     if (prevPiece != null)
                     {
+                        solvedData.tiles[prevPiece.x, prevPiece.y] = 0;
                         prevPiece.transform.position = hitInfo.point - Vector3.forward * 0.3f;
                         prevPiece.OnDeSelect();
                         shelfRightScript.AddItem(prevPiece.transform);
                         shelfLeftScript.RemoveItem(prevPiece.transform);
                         prevPiece = null;
+                        GlobalData.moves += 1;
+                        gridData.PrintGridAsString();
+                        solvedData.PrintGridAsString();
                     }
                 }
                 else if (hitInfo.collider.name.Contains("JigTileBG"))
                 {
                     if (prevPiece != null)
                     {
-                        solvedData.tiles[prevPiece.x, prevPiece.y] = prevPiece.ID;
+                        JigPiece curPiece = hitInfo.collider.GetComponent<JigPiece>();
+                        if (curPiece != null)
+                        {
+                            //Debug.LogError(" " + curPiece.ID + " " + curPiece.x + " " + curPiece.y);
+                            solvedData.tiles[curPiece.x, curPiece.y] = prevPiece.ID;
+                            if (prevPiece.transform.parent == jigsawBoard.transform)
+                                solvedData.tiles[prevPiece.x, prevPiece.y] = 0;
+                            prevPiece.x = curPiece.x;
+                            prevPiece.y = curPiece.y;
+                        }
+                        else
+                            Debug.LogError(hitInfo.collider.name);
+
                         prevPiece.transform.position = hitInfo.collider.transform.position - Vector3.forward * 0.3f;
                         prevPiece.transform.parent = jigsawBoard.transform;
                         prevPiece.OnDeSelect();
@@ -210,6 +264,7 @@ namespace ParuthidotExE
                         prevPiece = null;
                         gridData.PrintGridAsString();
                         solvedData.PrintGridAsString();
+                        GlobalData.moves += 1;
                     }
                 }
                 else
@@ -221,6 +276,8 @@ namespace ParuthidotExE
                         if (prevPiece != null && prevPiece.ID != curPiece.ID)
                         {
                             prevPiece.OnDeSelect();
+                            GlobalData.moves += 1;
+                            //solvedData.tiles[prevPiece.x, prevPiece.y] = 0;
                         }
                         prevPiece = curPiece;
                     }
@@ -239,7 +296,11 @@ namespace ParuthidotExE
                         return false;
                 }
             }
+            OnGameOverUI();
+            GO_timerText.text = "Time\n" + GetTimeAsString();
+            GO_movesText.text = "Moves\n" + GlobalData.moves;
             Debug.Log("Game Won");
+            isGameOver = true;
             return true;
         }
 
@@ -262,6 +323,33 @@ namespace ParuthidotExE
 
 
         #region UI
+        public void OnBackBtn()
+        {
+            SceneManager.LoadScene("Jig_Menu");
+        }
+
+
+        public void OnStartGameUI()
+        {
+            gameOverPanel.SetActive(false);
+            gamePanel.SetActive(true);
+        }
+
+
+        public void OnGameOverUI()
+        {
+            gameOverPanel.SetActive(true);
+            gamePanel.SetActive(false);
+        }
+
+        public string GetTimeAsString()
+        {
+            timeSpan = TimeSpan.FromSeconds((int)GlobalData.timePlayed);
+            return timeSpan.Minutes.ToString("00") + " : " + timeSpan.Seconds.ToString("00");
+
+            //return ((int)GlobalData.timePlayed).ToString("f2");
+        }
+
         public void OnCreaeteBtn()
         {
 
@@ -276,40 +364,40 @@ namespace ParuthidotExE
 
         public void OnRestartBtn()
         {
-            ReStartGame(gridDimension.x, gridDimension.y);
+            InitGame(gridDimension.x, gridDimension.y);
         }
 
         public void OnHigherBtn()
         {
-            ReStartGame(gridDimension.x + 1, gridDimension.y + 1);
+            InitGame(gridDimension.x + 1, gridDimension.y + 1);
         }
 
 
         public void OnLowerBtn()
         {
-            ReStartGame(gridDimension.x - 1, gridDimension.y - 1);
+            InitGame(gridDimension.x - 1, gridDimension.y - 1);
         }
 
         public void OnHigherBtnX()
         {
-            ReStartGame(gridDimension.x + 1, gridDimension.y);
+            InitGame(gridDimension.x + 1, gridDimension.y);
         }
 
 
         public void OnLowerBtnX()
         {
-            ReStartGame(gridDimension.x - 1, gridDimension.y);
+            InitGame(gridDimension.x - 1, gridDimension.y);
         }
 
         public void OnHigherBtnY()
         {
-            ReStartGame(gridDimension.x, gridDimension.y + 1);
+            InitGame(gridDimension.x, gridDimension.y + 1);
         }
 
 
         public void OnLowerBtnY()
         {
-            ReStartGame(gridDimension.x, gridDimension.y - 1);
+            InitGame(gridDimension.x, gridDimension.y - 1);
         }
 
         #endregion
@@ -335,3 +423,8 @@ namespace ParuthidotExE
 // drag and drop to the bg, tray
 // drop position indicator like shadow/laser 
 //
+
+// version alpha
+// Time as 00;00
+// stars
+// 

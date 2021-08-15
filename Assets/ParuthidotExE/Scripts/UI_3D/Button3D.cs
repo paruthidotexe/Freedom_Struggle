@@ -9,6 +9,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace ParuthidotExE
 {
@@ -35,7 +36,7 @@ namespace ParuthidotExE
         public MaterialPropertyBlock propBlock;
         public Collider btnCollider;
         public IntChannelSO TapEvent;
-        public Event clickedEvent;
+        public UnityEvent clickedEvent;
 
         private void OnEnable()
         {
@@ -79,6 +80,8 @@ namespace ParuthidotExE
                 //Debug.Log("RaiseEvent : " + choiceIndex);
                 TapEvent.RaiseEvent(choiceIndex);
                 OnButtonPressed();
+                if (clickedEvent != null)
+                    clickedEvent.Invoke();
             }
         }
 

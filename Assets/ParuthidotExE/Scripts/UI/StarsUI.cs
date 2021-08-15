@@ -9,7 +9,7 @@
 using UnityEngine;
 
 
-namespace MiniGames
+namespace ParuthidotExE
 {
     public class StarsUI : MonoBehaviour
     {
@@ -32,7 +32,7 @@ namespace MiniGames
             starsUICount = noOfStars;
             for (int i = 0; i < starsList.Length; i++)
             {
-                if (i <= starsUICount)
+                if (i < starsUICount)
                     starsList[i].SetActive(true);
                 else
                     starsList[i].SetActive(false);
