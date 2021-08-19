@@ -21,7 +21,7 @@ namespace ParuthidotExE
         void Start()
         {
             timeleft = updateInterval;
-            Application.targetFrameRate = 30;
+            //Application.targetFrameRate = 30;
         }
 
         void Update()

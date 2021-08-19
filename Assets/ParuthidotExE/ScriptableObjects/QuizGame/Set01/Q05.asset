@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Q05
   m_EditorClassIdentifier: 
   ID: 5
-  question: Kings
+  question: Velu Thampi led a revolt against the British in state of
   imagePath: 
   totalChoices: 4
   choices:
-  - king
-  - Tippu Sultan
-  - Pandian
-  - kng
-  totalAnswers: 2
-  answers: 0100000002000000
+  - Baroda
+  - Travancore
+  - Mysore
+  - Hyderabad
+  totalAnswers: 1
+  answers: 01000000
   selected: 00000000000000000000000000000000

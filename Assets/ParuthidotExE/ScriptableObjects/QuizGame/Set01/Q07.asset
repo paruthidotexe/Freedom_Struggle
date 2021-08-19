@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Q07
   m_EditorClassIdentifier: 
   ID: 7
-  question: Republic Year
+  question: When India beocme Republic
   imagePath: 
   totalChoices: 4
   choices:

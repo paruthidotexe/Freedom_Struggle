@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Q02
   m_EditorClassIdentifier: 
   ID: 2
-  question: Republic day of india
+  question: Republic day of india is on
   imagePath: 
   totalChoices: 4
   choices:

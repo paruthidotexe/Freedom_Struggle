@@ -61,7 +61,7 @@ namespace ParuthidotExE
             levelMgr.LoadLevel();
             gameTimer = new GameTimer();
             gameTimer.StartTimer();
-            Application.targetFrameRate = 30;
+            //Application.targetFrameRate = 30;
         }
 
 

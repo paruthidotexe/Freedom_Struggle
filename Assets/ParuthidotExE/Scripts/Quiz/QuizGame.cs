@@ -32,7 +32,6 @@ namespace ParuthidotExE
         [SerializeField] QuizQuestion quizQuestion;
         [SerializeField] QuizChoice[] quizChoices;
 
-
         bool isGameOver = false;
         [SerializeField] GameObject gamePanel;
         [SerializeField] GameObject gameOverPanel;

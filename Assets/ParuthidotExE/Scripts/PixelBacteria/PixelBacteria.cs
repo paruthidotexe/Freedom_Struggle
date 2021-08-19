@@ -78,7 +78,7 @@ namespace ParuthidotExE
             GlobalData.OnInit();
             gameTimer = new GameTimer();
             gameTimer.StartTimer();
-            Application.targetFrameRate = 60;
+            //Application.targetFrameRate = 60;
             //levelMgr.LoadLevel();
             gridData = LevelDB.GetGridData(levelWidth, levelHeight);
             levelTilesData = gridData.tiles;

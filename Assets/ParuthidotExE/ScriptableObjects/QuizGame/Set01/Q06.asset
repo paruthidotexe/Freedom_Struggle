@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Q06
   m_EditorClassIdentifier: 
   ID: 6
-  question: 'Seperated as '
+  question: Tipu sultan was the ruler of
   imagePath: 
   totalChoices: 4
   choices:
-  - Srilanka
-  - Bangaladesh
-  - India
-  - Pakistan
-  totalAnswers: 3
-  answers: 000000000200000003000000
+  - Vijayanagar
+  - Madurai
+  - Hyderabad
+  - Mysore
+  totalAnswers: 1
+  answers: 03000000
   selected: 00000000000000000000000000000000
