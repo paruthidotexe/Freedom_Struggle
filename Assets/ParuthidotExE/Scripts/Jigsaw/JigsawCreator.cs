@@ -43,6 +43,7 @@ namespace ParuthidotExE
         JigPiece prevPiece;
         GridData solvedData;
 
+        float boardWidth = 10;
         float aspectRatio = 1;
         float aspectWidth = 10;
         float aspectHeight = 10;
@@ -105,18 +106,18 @@ namespace ParuthidotExE
             }
             if (jigsawPicData.aspectHeight > jigsawPicData.aspectWidth)
             {
-                aspectHeight = 10;
+                aspectHeight = boardWidth;
                 aspectWidth = jigsawPicData.aspectWidth * 10.0f / jigsawPicData.aspectHeight;
             }
             else if (jigsawPicData.aspectHeight < jigsawPicData.aspectWidth)
             {
-                aspectWidth = 10;
+                aspectWidth = boardWidth;
                 aspectHeight = jigsawPicData.aspectHeight * 10.0f / jigsawPicData.aspectWidth;
             }
             else
             {
-                aspectHeight = 10;
-                aspectWidth = 10;
+                aspectHeight = boardWidth;
+                aspectWidth = boardWidth;
             }
 
             gridX = (int)jigsawPicData.aspectWidth;
@@ -138,7 +139,7 @@ namespace ParuthidotExE
             if (gridY < 3)
                 gridY = 3;
 
-            if(UnityEngine.Random.Range(0,2) == 0)
+            if (UnityEngine.Random.Range(0, 2) == 0)
             {
                 gridX = 4;
                 gridY = 4;

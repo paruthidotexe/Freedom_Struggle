@@ -28,6 +28,7 @@ namespace ParuthidotExE
         public string leaderName = "Ponniah";
         public List<string> achivements = new List<string>() { "Awareness Guidance Action" };
 
+
         void Start()
         {
 
@@ -41,6 +42,7 @@ namespace ParuthidotExE
 
 
     }
+
 
 }
 
