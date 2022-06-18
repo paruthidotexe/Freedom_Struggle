@@ -2,17 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JigRandomLevel : MonoBehaviour
+namespace ParuthidotExE
 {
-    // Start is called before the first frame update
-    void Start()
+    public class JigRandomLevel : MonoBehaviour, IEditorApply
     {
-        
+        void Start()
+        {
+            RandomizeLevel();
+        }
+
+
+        void Update()
+        {
+
+        }
+
+
+        public void Apply()
+        {
+            RandomizeLevel();
+        }
+
+
+        public void RandomizeLevel()
+        {
+            JigRandomChildren[] allChildren = gameObject.GetComponentsInChildren<JigRandomChildren>();
+            foreach (JigRandomChildren curChild in allChildren)
+            {
+                curChild.ShowRandom();
+            }
+        }
+
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
+

@@ -40,6 +40,32 @@ namespace ParuthidotExE
                 gridElementUI.SetJigsawPicData(jigsawPicDatas[i]);
             }
         }
+
+
+        public void OnMoveLeft()
+        {
+
+        }
+
+
+        public void OnMoveRight()
+        {
+
+        }
+
+
+        public void OnGridView()
+        {
+
+        }
+
+
+        public void OnRoomView()
+        {
+
+        }
+
+
     }
 
 
